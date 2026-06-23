@@ -180,7 +180,7 @@ const PHOTO_EVENTS = [
     date: '2024-11-07',
     year: 2024,
     folder: 'images2024',
-    caption: 'Together we're Happy, Happy Moment for Everyone',
+    caption: "Together we're Happy, Happy Moment for Everyone",
     photos: [
       '7 Nov 24 (1).jpg',
       '7 Nov 24 (2).jpg',
@@ -853,7 +853,7 @@ const VIDEO_EVENTS = {
       date: '2024-11-21',
       folder: 'videosMomenSeru',
       filename: '21 Nov 24 Video Alpro.mp4',
-      caption: 'Let's we sing Theme Song " Apotek Alpro"=)',
+      caption: "Let's we sing Theme Song ' Apotek Alpro' =)",
     },
     {
       id: 'v-grand-opening-2024',
@@ -943,7 +943,7 @@ const VIDEO_EVENTS = {
       date: '2025-08-20',
       folder: 'videosMomenSeru',
       filename: 'Agustusan 20 Aug 25 (2).mp4',
-      caption: 'Sebanyak apapun tag nya, it's work & worth it',
+      caption: "Sebanyak apapun tag nya, it's work & worth it",
     },
 
     {
