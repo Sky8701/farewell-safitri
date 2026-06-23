@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Album digital kenangan bersama Safitri Lailasari — Apotek Alpro, Divisi Sales & Geo Marketing. Terima kasih atas dua tahun dedikasi yang luar biasa." />
+  <meta name="theme-color" content="#4A0E1A" />
+
+  <!-- Open Graph (untuk share WhatsApp/IG) -->
+  <meta property="og:title" content="Farewell, Safitri Lailasari 🌸" />
+  <meta property="og:description" content="Dua tahun penuh warna bersama kami. Album kenangan dari Apotek Alpro." />
+  <meta property="og:type" content="website" />
+
+  <title>Farewell, Safitri Lailasari 🌸 — Apotek Alpro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     LOADING SCREEN
+     ═══════════════════════════════════════ -->
+<div id="loading-screen">
+  <div class="loading-logo">Safitri Lailasari, S.Sos</div>
+  <div class="loading-bar-wrap">
+    <div class="loading-bar"></div>
+  </div>
+  <div class="loading-text">Menyiapkan kenangan...</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SETUP OVERLAY (muncul jika config.js belum diisi)
+     ═══════════════════════════════════════ -->
+<div id="setup-overlay" class="hidden">
+  <div class="setup-card">
+    <div class="setup-icon">🔧</div>
+    <h2 class="setup-title">Perlu Dikonfigurasi</h2>
+    <p class="setup-desc">
+      Isi file <strong>config.js</strong> dengan API Key Google Drive dan
+      ID folder untuk menampilkan foto, video, dan musik.
+    </p>
+    <div class="setup-steps">
+      <div class="setup-step">
+        <span class="setup-step-num">1</span>
+        <span>Baca file <strong>PANDUAN_SETUP.md</strong> untuk panduan lengkap</span>
+      </div>
+      <div class="setup-step">
+        <span class="setup-step-num">2</span>
+        <span>Upload folder ke Google Drive dan share dengan "Anyone with link"</span>
+      </div>
+      <div class="setup-step">
+        <span class="setup-step-num">3</span>
+        <span>Isi <code>apiKey</code> dan <code>folderIds</code> di <strong>config.js</strong></span>
+      </div>
+      <div class="setup-step">
+        <span class="setup-step-num">4</span>
+        <span>Isi <code>caption</code> untuk setiap event di <strong>data.js</strong></span>
+      </div>
+    </div>
+    <button class="btn-setup-skip" onclick="dismissSetup()">
+      Lihat dulu tanpa foto ›
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MUSIC PLAYER (Fixed Floating)
+     ═══════════════════════════════════════ -->
+<div id="music-player" style="display:none">
+  <div class="player-wave" id="player-wave">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="player-info">
+    <span class="player-title">Hadiah Untuknya</span>
+    <span class="player-subtitle">Apotek Alpro 🎵</span>
+  </div>
+  <button class="player-btn play-pause" id="btn-play-pause" aria-label="Play/Pause musik">
+    <span id="play-icon">▶</span>
+    <span id="pause-icon" style="display:none">⏸</span>
+  </button>
+  <button class="player-btn" id="btn-mute" aria-label="Mute/Unmute musik">
+    <span id="mute-icon">🔊</span>
+  </button>
+  <button class="player-btn" id="btn-download-music" aria-label="Download musik" title="Download lagu">
+    ⬇
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════ -->
+<nav id="main-nav" role="navigation" aria-label="Menu utama">
+  <div class="nav-brand">Apotek Alpro</div>
+
+  <!-- Desktop -->
+  <ul class="nav-links" role="list">
+    <li><a href="#hero"        class="nav-link" aria-label="Halaman depan">Beranda</a></li>
+    <li><a href="#piagam"      class="nav-link" aria-label="Piagam penghargaan">Piagam</a></li>
+    <li><a href="#album-foto"  class="nav-link" aria-label="Album foto">Foto</a></li>
+    <li><a href="#album-video" class="nav-link" aria-label="Album video">Video</a></li>
+    <li><a href="#pesan-kesan" class="nav-link" aria-label="Pesan dan kesan">Pesan</a></li>
+  </ul>
+
+  <!-- Mobile hamburger -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Buka menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu navigasi">
+  <a href="#hero"        class="nav-link">Beranda</a>
+  <a href="#piagam"      class="nav-link">Piagam</a>
+  <a href="#album-foto"  class="nav-link">Album Foto</a>
+  <a href="#album-video" class="nav-link">Album Video</a>
+  <a href="#pesan-kesan" class="nav-link">Pesan & Kesan</a>
+  <a href="#penutup"     class="nav-link">Penutup</a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1: HERO
+     ═══════════════════════════════════════ -->
+<section id="hero" aria-label="Halaman utama">
+  <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+
+  <!-- Background cover photo dari Drive -->
+  <div id="hero-cover" class="hero-bg-overlay"
+       style="background: linear-gradient(135deg, #30080F 0%, #4A0E1A 50%, #30080F 100%);">
+  </div>
+  <div class="hero-bg-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-ornament"></div>
+
+    <p class="hero-eyebrow">Apotek Alpro · Sales & Geo Marketing</p>
+
+    <h1 class="hero-name">Safitri</h1>
+    <p class="hero-name-suffix">Lailasari, S.Sos</p>
+
+    <p class="hero-tagline">
+      "Dua tahun penuh dedikasi, tawa, dan kenangan yang tak terlupakan"
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Bergabung</span>
+        <span class="hero-meta-value">1 Juni 2024</span>
+      </div>
+      <div class="hero-meta-sep"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Hari Terakhir</span>
+        <span class="hero-meta-value">30 Juni 2026</span>
+      </div>
+      <div class="hero-meta-sep"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Bersama Kami</span>
+        <span class="hero-meta-value">2 Tahun</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#album-foto" class="btn-primary">Lihat Album Kenangan</a>
+      <a href="#piagam"     class="btn-ghost">Lihat Piagam</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 2: PIAGAM PENGHARGAAN
+     ═══════════════════════════════════════ -->
+<section id="piagam" aria-label="Piagam penghargaan">
+  <div class="section-inner">
+    <div class="piagam-intro fade-in-up">
+      <span class="section-label">Penghargaan</span>
+      <h2 class="section-title">Piagam <em>Apresiasi</em></h2>
+      <p class="section-subtitle">
+        Sebagai bentuk penghargaan atas kontribusi luar biasa selama dua tahun bersama kami.
+      </p>
+    </div>
+
+    <div class="piagam-wrapper fade-in-up">
+      <div class="piagam-card" id="piagam-certificate" role="article">
+
+        <!-- Corner ornaments -->
+        <div class="piagam-corner tl">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 38 L2 2 L38 2" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <path d="M2 20 L2 2 L20 2" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2,4" fill="none"/>
+            <circle cx="2" cy="2" r="2" fill="#C9A84C"/>
+          </svg>
+        </div>
+        <div class="piagam-corner tr">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 38 L2 2 L38 2" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <path d="M2 20 L2 2 L20 2" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2,4" fill="none"/>
+            <circle cx="2" cy="2" r="2" fill="#C9A84C"/>
+          </svg>
+        </div>
+        <div class="piagam-corner bl">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 38 L2 2 L38 2" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <path d="M2 20 L2 2 L20 2" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2,4" fill="none"/>
+            <circle cx="2" cy="2" r="2" fill="#C9A84C"/>
+          </svg>
+        </div>
+        <div class="piagam-corner br">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 38 L2 2 L38 2" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+            <path d="M2 20 L2 2 L20 2" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2,4" fill="none"/>
+            <circle cx="2" cy="2" r="2" fill="#C9A84C"/>
+          </svg>
+        </div>
+
+        <!-- Logo -->
+        <img class="piagam-logo" src="" alt="Logo Apotek Alpro" style="display:none" />
+        <div class="piagam-logo-placeholder" aria-hidden="true">A</div>
+
+        <!-- Header -->
+        <p class="piagam-header">Apotek Alpro · Divisi Sales & Geo Marketing</p>
+        <h2 class="piagam-main-title">Piagam Penghargaan</h2>
+        <p class="piagam-subtitle">Certificate of Appreciation</p>
+
+        <div class="piagam-divider">
+          <div class="piagam-divider-line"></div>
+          <span class="piagam-divider-star">✦</span>
+          <div class="piagam-divider-line"></div>
+        </div>
+
+        <!-- Recipient -->
+        <p class="piagam-diberikan">Diberikan dengan bangga kepada</p>
+        <h3 class="piagam-name" id="piagam-name-text">Safitri Lailasari, S.Sos</h3>
+
+        <!-- Roles -->
+        <div class="piagam-roles" id="piagam-roles-container">
+          <!-- Diisi oleh app.js -->
+          <div class="piagam-role">
+            <div class="piagam-role-title">Operation Support Executive</div>
+            <div class="piagam-role-period">1 Juni 2024 – 30 September 2025</div>
+          </div>
+          <div class="piagam-role">
+            <div class="piagam-role-title">Customer Executive</div>
+            <div class="piagam-role-period">1 Oktober 2025 – 30 Juni 2026</div>
+          </div>
+        </div>
+
+        <div class="piagam-divider">
+          <div class="piagam-divider-line"></div>
+          <span class="piagam-divider-star">✦</span>
+          <div class="piagam-divider-line"></div>
+        </div>
+
+        <!-- Description -->
+        <p class="piagam-description">
+          Atas dedikasi, semangat, dan kontribusi luar biasa yang telah diberikan
+          selama bergabung bersama kami. Terima kasih telah menjadi bagian yang
+          tak tergantikan dari perjalanan Apotek Alpro.
+        </p>
+
+        <!-- Company -->
+        <p class="piagam-company" id="piagam-company-text">Apotek Alpro</p>
+        <p class="piagam-division" id="piagam-division-text">Sales & Geo Marketing</p>
+
+        <div class="piagam-divider">
+          <div class="piagam-divider-line"></div>
+          <span class="piagam-divider-star">✦ ✦ ✦</span>
+          <div class="piagam-divider-line"></div>
+        </div>
+
+        <p style="font-size:0.75rem;color:var(--text-muted);letter-spacing:0.1em" id="piagam-period-text">
+          1 Juni 2024 – 30 Juni 2026
+        </p>
+      </div>
+    </div>
+
+    <!-- Action buttons (outside piagam card, not printed) -->
+    <div class="piagam-actions fade-in-up" style="margin-top:32px;justify-content:center;display:flex;flex-wrap:wrap;gap:12px;">
+      <button class="btn-piagam download" id="btn-download-piagam" aria-label="Download piagam">
+        ⬇ Download Piagam
+      </button>
+      <button class="btn-piagam print" id="btn-print-piagam" aria-label="Print piagam">
+        🖨 Print
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 3: ALBUM FOTO
+     ═══════════════════════════════════════ -->
+<section id="album-foto" aria-label="Album foto kenangan">
+  <div class="section-inner">
+
+    <div class="album-header fade-in-up">
+      <span class="section-label">Galeri</span>
+      <h2 class="section-title">Album <em>Foto</em></h2>
+      <p class="section-subtitle">
+        Setiap momen diabadikan, setiap tawa dikenang.
+        2024 · 2025 · 2026
+      </p>
+      <div class="gold-divider"></div>
+
+      <!-- Year navigation tabs -->
+      <div class="year-tabs" id="year-tabs" role="tablist" aria-label="Filter tahun">
+        <!-- Diisi oleh app.js -->
+      </div>
+    </div>
+
+    <!-- Events container -->
+    <div class="events-container" id="events-container" role="main">
+      <!-- Diisi oleh app.js -->
+      <div style="text-align:center;padding:60px;color:var(--text-muted)">
+        <div style="font-size:2rem;margin-bottom:16px">⌛</div>
+        Memuat album foto...
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 4: ALBUM VIDEO
+     ═══════════════════════════════════════ -->
+<section id="album-video" aria-label="Album video kenangan">
+  <div class="section-inner">
+
+    <div class="fade-in-up">
+      <span class="section-label">Memori Bergerak</span>
+      <h2 class="section-title">Album <em>Video</em></h2>
+      <p class="section-subtitle">
+        Momen-momen seru yang bergerak — dari Grand Opening hingga training yang memperkaya.
+      </p>
+      <div class="gold-divider"></div>
+
+      <!-- Video tabs -->
+      <div id="video-tabs" role="tablist" aria-label="Kategori video">
+        <!-- Diisi oleh app.js -->
+      </div>
+    </div>
+
+    <!-- Video grid -->
+    <div class="video-grid" id="video-grid" role="list" aria-label="Daftar video">
+      <!-- Diisi oleh app.js -->
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 5: PESAN & KESAN
+     ═══════════════════════════════════════ -->
+<section id="pesan-kesan" aria-label="Pesan dan kesan">
+  <div class="section-inner">
+
+    <div class="text-center fade-in-up" style="margin-bottom:0">
+      <span class="section-label">Dari Hati Kami</span>
+      <h2 class="section-title">Pesan <em>&</em> Kesan</h2>
+      <p class="section-subtitle" style="margin:0 auto">
+        Kata-kata yang ingin kami sampaikan sebelum kamu melangkah ke babak baru kehidupan.
+      </p>
+      <div class="gold-divider" style="margin:24px auto"></div>
+    </div>
+
+    <div class="messages-grid" id="messages-grid" role="list" aria-label="Pesan dari tim">
+      <!-- Diisi oleh app.js -->
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 6: PENUTUP
+     ═══════════════════════════════════════ -->
+<section id="penutup" aria-label="Penutup">
+  <canvas id="penutup-canvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+
+  <div class="penutup-content">
+    <span class="penutup-ornament" aria-hidden="true">❝</span>
+
+    <blockquote class="penutup-quote">
+      "Setiap akhir adalah sebuah awal yang lebih indah.
+      Kamu tidak hanya meninggalkan sebuah tempat kerja —
+      kamu membawa serta kenangan yang menjadi bagian dari
+      siapa kami hari ini."
+    </blockquote>
+
+    <p class="penutup-subquote">Selamat menempuh perjalanan baru, Safitri 🌸</p>
+
+    <div class="gold-divider" style="margin:32px auto;background:linear-gradient(90deg,transparent,#C9A84C,transparent)"></div>
+
+    <p class="penutup-signature">Tim Apotek Alpro</p>
+    <p class="penutup-from" style="margin-bottom:8px">Sales & Geo Marketing</p>
+    <p class="penutup-from">2024 – 2026</p>
+
+    <!-- Stats bar -->
+    <div style="display:flex;gap:32px;justify-content:center;margin-top:48px;flex-wrap:wrap;">
+      <div style="text-align:center">
+        <div style="font-family:var(--font-heading);font-size:2.5rem;color:var(--gold);line-height:1">379+</div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted)">Foto Kenangan</div>
+      </div>
+      <div style="width:1px;background:var(--dark-border)"></div>
+      <div style="text-align:center">
+        <div style="font-family:var(--font-heading);font-size:2.5rem;color:var(--gold);line-height:1">32+</div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted)">Video Momen</div>
+      </div>
+      <div style="width:1px;background:var(--dark-border)"></div>
+      <div style="text-align:center">
+        <div style="font-family:var(--font-heading);font-size:2.5rem;color:var(--gold);line-height:1">2</div>
+        <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted)">Tahun Bersama</div>
+      </div>
+    </div>
+
+    <p class="penutup-footer">
+      Made with ❤ for Safitri Lailasari — Apotek Alpro 2026
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     LIGHTBOX MODAL
+     ═══════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-label="Lightbox foto" aria-modal="true">
+  <div class="lightbox-counter" id="lb-counter" aria-live="polite">1 / 1</div>
+
+  <div class="lightbox-nav" aria-hidden="true">
+    <button class="lightbox-nav-btn" onclick="PhotoAlbum.lbPrev()" aria-label="Foto sebelumnya">‹</button>
+    <button class="lightbox-nav-btn" onclick="PhotoAlbum.lbNext()" aria-label="Foto berikutnya">›</button>
+  </div>
+
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="PhotoAlbum.closeLightbox()" aria-label="Tutup lightbox">✕</button>
+    <img id="lb-img" class="lightbox-img" src="" alt="Foto kenangan" />
+    <p class="lightbox-caption" id="lb-caption"></p>
+    <div class="lightbox-actions">
+      <button class="lightbox-btn" id="lb-download" aria-label="Download foto">⬇ Download</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     VIDEO MODAL
+     ═══════════════════════════════════════ -->
+<div id="video-modal" role="dialog" aria-label="Pemutar video" aria-modal="true">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="VideoAlbum.closeModal()" aria-label="Tutup video">✕</button>
+    <h3 class="video-modal-title" id="vm-title"></h3>
+    <div class="video-modal-frame" id="vm-frame"></div>
+    <p class="video-modal-caption" id="vm-caption"></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════ -->
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
