@@ -1118,12 +1118,11 @@ const MESSAGES = [
   //   message: 'Teks pesan di sini...',
   //   emoji: '🌸', // opsional, emoji untuk dekorasi kartu
   // },
-  //
-  // Contoh (hapus ini dan isi dengan yang asli):
-  // {
-  //   name: 'Hendri',
-  //   role: 'OSS',
-  //   message: 'Safitri, semua yang kamu buat selama 2,5 tahun ini tidak sia-sia. Kamu sudah membawa legacy baik, selesai dengan apresiasi tinggi. Good luck dan happy-happy di luar sana ya, Fit',
-  //   emoji: '💛',
-  // },
+
+  {
+    name: 'Hendri',
+    role: 'OSS',
+    message: 'Safitri, semua yang kamu buat selama 2,5 tahun ini tidak sia-sia. Kamu sudah membawa legacy baik, selesai dengan apresiasi tinggi. Good luck dan happy-happy di luar sana ya, Fit',
+    emoji: '💛',
+  },
 ];
