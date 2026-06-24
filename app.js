@@ -131,6 +131,16 @@ const MusicPlayer = {
       console.warn('[Music] Audio error:', e);
     });
 
+    this.audio.addEventListener('waiting', () => {
+      document.getElementById('player-wave')?.classList.add('buffering');
+    });
+    this.audio.addEventListener('playing', () => {
+      document.getElementById('player-wave')?.classList.remove('buffering');
+    });
+    this.audio.addEventListener('pause', () => {
+      document.getElementById('player-wave')?.classList.remove('buffering');
+    });
+
     // Auto-play on first user interaction (browser policy)
     const autoPlay = () => {
       this.play();

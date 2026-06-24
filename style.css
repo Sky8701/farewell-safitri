@@ -292,6 +292,14 @@ ul { list-style: none; }
 .player-wave span:nth-child(4) { height: 12px; animation-delay: 0.45s; }
 .player-wave span:nth-child(5) { height: 6px;  animation-delay: 0.6s; }
 .player-wave.paused span { animation-play-state: paused; }
+.player-wave.buffering span {
+  animation: wave-bar-pulse 0.6s ease-in-out infinite alternate;
+  background: var(--gold-light);
+}
+@keyframes wave-bar-pulse {
+  0% { transform: scaleY(0.4); opacity: 0.5; }
+  100% { transform: scaleY(1.2); opacity: 1; }
+}
 
 /* ════════════════════════════════════════
    SECTION COMMONS
@@ -1765,5 +1773,7 @@ section {
     box-shadow: none;
     max-width: 100%;
     page-break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
