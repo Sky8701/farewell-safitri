@@ -49,9 +49,15 @@ const DriveAPI = {
     return `https://drive.google.com/thumbnail?id=${fileId}&sz=${size}`;
   },
 
-  /** Full-size view URL */
+  /** Full-size view URL (images only) */
   viewUrl(fileId) {
     return `https://lh3.googleusercontent.com/d/${fileId}`;
+  },
+
+  /** Audio/video stream URL via Drive API */
+  audioStreamUrl(fileId) {
+    // Drive API alt=media returns the actual file bytes — works for MP3/audio
+    return `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${CONFIG.apiKey}`;
   },
 
   /** Download URL */
@@ -95,23 +101,38 @@ const MusicPlayer = {
       document.getElementById('music-player').style.opacity = '0.3';
       return;
     }
-    this.audio = new Audio(DriveAPI.viewUrl(musicId));
-    this.audio.loop = true;
-    this.audio.volume = 0.6;
 
-    // Auto-play on first user interaction
+    // ✅ Use Drive API stream URL (not lh3 which is images-only)
+    const streamUrl = DriveAPI.audioStreamUrl(musicId);
+    this.audio = new Audio(streamUrl);
+    this.audio.loop = true;
+    this.audio.volume = 0.7;
+    this.audio.preload = 'none'; // don't preload until user interacts
+
+    this.audio.addEventListener('error', (e) => {
+      console.warn('[Music] Audio error:', e);
+    });
+
+    // Auto-play on first user interaction (browser policy)
     const autoPlay = () => {
       this.play();
-      document.removeEventListener('click', autoPlay);
-      document.removeEventListener('touchstart', autoPlay);
     };
     document.addEventListener('click', autoPlay, { once: true });
     document.addEventListener('touchstart', autoPlay, { once: true });
 
     // Bind buttons
-    document.getElementById('btn-play-pause').addEventListener('click', () => this.toggle());
-    document.getElementById('btn-mute').addEventListener('click', () => this.toggleMute());
-    document.getElementById('btn-download-music').addEventListener('click', () => this.download());
+    document.getElementById('btn-play-pause').addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent triggering autoPlay
+      this.toggle();
+    });
+    document.getElementById('btn-mute').addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.toggleMute();
+    });
+    document.getElementById('btn-download-music').addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.download();
+    });
 
     document.getElementById('music-player').style.display = 'flex';
   },
@@ -298,17 +319,90 @@ const Confetti = {
 };
 
 // ════════════════════════════════════════
-//  HERO SECTION
+//  HERO SECTION — Multi-cover slideshow
 // ════════════════════════════════════════
+const HeroSlideshow = {
+  slides: [],
+  current: 0,
+  timer: null,
+  INTERVAL: 5000, // ms between slides
+
+  /** Build slides from resolved file IDs */
+  init(fileIds) {
+    const container = document.getElementById('hero-cover');
+    if (!container || fileIds.length === 0) return;
+
+    // Remove placeholder fallback once we have real photos
+    const fallback = container.querySelector('.hero-cover-fallback');
+
+    this.slides = fileIds.map((id, idx) => {
+      const div = document.createElement('div');
+      div.className = `hero-cover-slide${idx === 0 ? ' active' : ''}`;
+
+      const img = document.createElement('img');
+      img.alt = `Cover foto ${idx + 1}`;
+      // Use w2048 thumbnail for high-res but fast loading
+      img.src = DriveAPI.thumbUrl(id, 'w2048');
+      img.loading = idx === 0 ? 'eager' : 'lazy';
+
+      img.onerror = () => {
+        // Fallback: try full viewUrl if thumbnail fails
+        if (!img.dataset.retried) {
+          img.dataset.retried = '1';
+          img.src = DriveAPI.viewUrl(id);
+        }
+      };
+
+      div.appendChild(img);
+      container.appendChild(div);
+      return div;
+    });
+
+    // Hide fallback gradient once first image loads
+    if (this.slides[0]) {
+      const firstImg = this.slides[0].querySelector('img');
+      firstImg.addEventListener('load', () => {
+        if (fallback) fallback.style.opacity = '0';
+      });
+    }
+
+    if (this.slides.length > 1) this.startTimer();
+  },
+
+  goTo(idx) {
+    this.slides[this.current]?.classList.remove('active');
+    this.current = (idx + this.slides.length) % this.slides.length;
+    this.slides[this.current]?.classList.add('active');
+  },
+
+  next() { this.goTo(this.current + 1); },
+
+  startTimer() {
+    this.timer = setInterval(() => this.next(), this.INTERVAL);
+  },
+
+  stopTimer() {
+    clearInterval(this.timer);
+  }
+};
+
 function initHero() {
-  // Load hero cover if available
-  const coverId = DriveAPI.getFileId('imagesCover', CONFIG.heroCoverFilename);
-  if (coverId) {
-    const heroEl = document.getElementById('hero-cover');
-    if (heroEl) heroEl.style.backgroundImage = `url('${DriveAPI.thumbUrl(coverId, 'w1600')}')`;
+  // Support both old single string and new array format (backwards-compatible)
+  const rawFilenames = CONFIG.heroCoverFilenames
+    || (CONFIG.heroCoverFilename ? [CONFIG.heroCoverFilename] : []);
+
+  // Resolve filenames → Drive file IDs
+  const fileIds = rawFilenames
+    .map(fname => DriveAPI.getFileId('imagesCover', fname))
+    .filter(Boolean);
+
+  if (fileIds.length > 0) {
+    HeroSlideshow.init(fileIds);
+  } else {
+    console.info('[Hero] No cover photos resolved — showing fallback gradient');
   }
 
-  // Load logo
+  // Load logo for piagam
   const logoId = DriveAPI.getFileId('sertifikat', CONFIG.certificate.logoFilename);
   if (logoId) {
     document.querySelectorAll('.piagam-logo').forEach(el => {
