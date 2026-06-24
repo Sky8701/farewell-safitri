@@ -46,14 +46,14 @@ const CONFIG = {
   // Foto akan berganti otomatis setiap 5 detik (slideshow).
   // Urutan bebas, min 1 foto, max tidak terbatas.
   heroCoverFilenames: [
-    '1730820218531.jfif',
+    '1730820218531.jfif','Apresiasi.png',
     // Tambah nama file lain dari folder Cover Random di sini:
     // 'Apresiasi.png',
   ],
 
   // ─── INFO SERTIFIKAT (sudah terisi, tidak perlu diubah) ───
   certificate: {
-    name: 'Safitri Lailasari, S.Sos','Apresiasi.png',
+    name: 'Safitri Lailasari, S.Sos',
     company: 'Apotek Alpro',
     division: 'Sales & Geo Marketing',
     roles: [
