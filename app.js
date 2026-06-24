@@ -424,7 +424,6 @@ function initPiagam() {
   // Fill dynamic content
   setText('piagam-name-text', cert.name);
   setText('piagam-company-text', cert.company);
-  setText('piagam-division-text', cert.division);
   setText('piagam-period-text', cert.totalPeriod);
 
   // Roles
@@ -436,6 +435,22 @@ function initPiagam() {
         <div class="piagam-role-period">${r.period}</div>
       </div>
     `).join('');
+  }
+
+  // Contributions (13 points)
+  const contribEl = document.getElementById('piagam-contributions-container');
+  if (contribEl && cert.contributions) {
+    contribEl.innerHTML = cert.contributions.map((text, idx) => {
+      const formattedText = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>');
+      return `
+        <div class="piagam-contribution-item">
+          <span class="piagam-contribution-number">${idx + 1}</span>
+          <span class="piagam-contribution-text">${formattedText}</span>
+        </div>
+      `;
+    }).join('');
   }
 
   // Download as image (using html2canvas-like approach)

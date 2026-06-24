@@ -55,7 +55,6 @@ const CONFIG = {
   certificate: {
     name: 'Safitri Lailasari, S.Sos',
     company: 'Apotek Alpro',
-    division: 'Sales & Geo Marketing',
     roles: [
       {
         title: 'Operation Support Executive',
@@ -67,6 +66,21 @@ const CONFIG = {
       }
     ],
     totalPeriod: '1 Juni 2024 – 30 Juni 2026',
-    logoFilename: 'Logo Alpro.webp',
+    logoFilename: 'Logo_Alpro-removebg-preview.png',
+    contributions: [
+      '**Penyusunan Laporan Adaptif:** Senantiasa adaptif dan tanggap dalam menyusun berbagai laporan operasional secara terstruktur demi mendukung pengambilan keputusan tim manajemen.',
+      '**Edukasi Pengetahuan Produk:** Menyusun materi pembelajaran produk (*product knowledge*) dan panduan teknis kompetisi secara komprehensif guna meningkatkan kapasitas tim di lapangan.',
+      '**Pengelolaan Kompetisi yang Adil:** Menghadirkan mekanisme kompetisi kerja yang terstruktur, transparan, menyenangkan, serta mengawal ketepatan waktu pencairan apresiasi tim.',
+      '**Koordinasi Logistik Event & GO:** Mengelola dan mengoordinasikan seluruh proses mobilisasi serta perpindahan barang untuk kebutuhan event dan Grand Opening (GO) dengan sangat rapi dan sistematis.',
+      '**Pelaksanaan Mini Event:** Merencanakan dan mengawal jalannya mini event melalui koordinasi lintas departemen yang harmonis demi mencapai kesuksesan bersama.',
+      '**Tanggung Jawab Kegiatan:** Menunjukkan komitmen tinggi dengan turut hadir mendampingi kelancaran mini event secara langsung guna memastikan kualitas acara terjaga.',
+      '**Pendampingan Grand Opening:** Selalu setia mendampingi dan mengawal perjuangan tim di lapangan selama proses Grand Opening dari awal hingga toko tutup, tanpa memedulikan jarak outlet.',
+      '**Solusi Masalah Outlet Baru:** Aktif memberikan dukungan operasional dan membantu memecahkan kendala teknis pada pembukaan berbagai outlet (seperti di Wisma Asri) hingga sukses berjalan lancar.',
+      '**Apresiasi Keberhasilan Bersama:** Menanamkan semangat kebersamaan dengan memastikan setiap pencapaian sukses Grand Opening diakui sebagai kemenangan bersama seluruh tim terkait.',
+      '**Jembatan Komunikasi (Liaison):** Berperan sebagai penghubung yang andal dalam menyelaraskan koordinasi komunikasi antara manajemen pusat dengan tim operasional di lapangan secara bijaksana.',
+      '**Rangkulan Emosional (Team Bonding):** Membangun hubungan yang erat berbasis empati yang tinggi, menciptakan lingkungan kerja yang nyaman dan suportif bagi tim Customer Executive (CE).',
+      '**Komitmen Dedikasi Tanpa Batas:** Menunjukkan dedikasi luar biasa dengan senantiasa meluangkan waktu demi memastikan seluruh tanggung jawab operasional terselesaikan dengan sempurna.',
+      '**Transisi Tugas yang Profesional:** Mempersiapkan proses serah terima pekerjaan (*handover*) secara matang, terperinci, dan penuh tanggung jawab demi keberlanjutan operasional tim.'
+    ]
   }
 };
