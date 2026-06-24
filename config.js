@@ -14,7 +14,11 @@ const CONFIG = {
   },
 
   musicFilename: 'Hadiah_Untuknya.mp3',
-  heroCoverFilename: 'Apresiasi.png',
+  heroCoverFilenames: [
+    '1730820218531.jfif',
+    // Tambah nama file lain dari folder Cover Random di sini:
+    // 'Apresiasi.png',
+  ],
 
   certificate: {
     name: 'Safitri Lailasari, S.Sos',
