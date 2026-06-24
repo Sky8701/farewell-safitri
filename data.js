@@ -1054,6 +1054,33 @@ const VIDEO_EVENTS = {
       filename: 'SUWAHYU 11 JUNI 26.mp4',
       caption: 'Birthday nya Wahyu, maaf ya tidak ketemu moment video ataupun foto birthday mu di Alpro 2 tahun terakhir ini (2024 belated di Desember, 2025 belated bebrapa hari karena kamu tidak di HQ dan dirayakan oleh genk mu di Kedai 47',
     },
+    {
+      id: 'v-morning-sharing-game-2026-1',
+      title: 'Morning Sharing Game 12 Juni (Part 1)',
+      displayDate: '12 Juni 2026',
+      date: '2026-06-12',
+      folder: 'videosMomenSeru',
+      filename: 'Morning Sharing Game 12 Jun 26 (1).mp4',
+      caption: 'Mungkin game seru-seru terakhir yang kamu ikuti bersama. Pastikan tonton pakai wifi, karena size video ini besar banget. Habis kuotamu nanti',
+    },
+    {
+      id: 'v-morning-sharing-game-2026-2',
+      title: 'Morning Sharing Game 12 Juni (Part 2)',
+      displayDate: '12 Juni 2026',
+      date: '2026-06-12',
+      folder: 'videosMomenSeru',
+      filename: 'Morning Sharing Game 12 Jun 26 (2).mp4',
+      caption: 'Kamu memang selalu All Out di semua kondisi y, selalu seru kalau ada kamu. Disclaimer tonton pakai wifi masih berlaku y, sumpah ini file nya hampir 1GB',
+    },
+    {
+      id: 'v-morning-sharing-game-2026-3',
+      title: 'Morning Sharing Game 12 Juni (Part 3)',
+      displayDate: '12 Juni 2026',
+      date: '2026-06-12',
+      folder: 'videosMomenSeru',
+      filename: 'Morning Sharing Game 12 Jun 26 (3).mp4',
+      caption: 'Dan sekali lagi, semua memang menjadi seru kalau ada kamu Fit, tq y sudah memberi warna di Alpro.',
+    },
   ],
 
   training: [
@@ -1122,7 +1149,7 @@ const MESSAGES = [
   {
     name: 'Hendri',
     role: 'OSS',
-    message: 'Safitri, semua yang kamu buat selama 2,5 tahun ini tidak sia-sia. Kamu sudah membawa legacy baik, selesai dengan apresiasi tinggi. \n\n Good luck dan happy-happy di luar sana ya, Fit',
+    message: 'Safitri, semua yang kamu buat selama 2,5 tahun ini tidak sia-sia. \n\n Kamu sudah membawa legacy baik, selesai dengan apresiasi tinggi. \n\n Good luck dan happy-happy di luar sana ya, Fit',
     emoji: '💛',
   },
   {
