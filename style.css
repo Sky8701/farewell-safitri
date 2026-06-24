@@ -728,6 +728,18 @@ section {
   margin: 0 auto 32px;
   font-style: italic;
 }
+/* Multi-version toggles */
+.piagam-card.compact-mode .full-only { display: none !important; }
+.piagam-card:not(.compact-mode) .compact-only { display: none !important; }
+.piagam-card.compact-mode .piagam-contributions-title,
+.piagam-card.compact-mode .piagam-contributions-grid,
+.piagam-card.compact-mode .piagam-note {
+  display: none !important;
+}
+.piagam-card.compact-mode .piagam-subtitle {
+  margin-bottom: 24px;
+}
+
 .piagam-contributions-title {
   font-family: var(--font-heading);
   color: var(--gold);

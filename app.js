@@ -453,6 +453,16 @@ function initPiagam() {
     }).join('');
   }
 
+  // Toggle Mode (Lengkap / Ringkas)
+  const toggleBtn = document.getElementById('btn-toggle-piagam');
+  const certCard = document.getElementById('piagam-certificate');
+  if (toggleBtn && certCard) {
+    toggleBtn.addEventListener('click', () => {
+      const isCompact = certCard.classList.toggle('compact-mode');
+      toggleBtn.textContent = isCompact ? '📋 Versi Lengkap' : '📋 Versi Ringkas';
+    });
+  }
+
   // Download as image (using html2canvas-like approach)
   document.getElementById('btn-download-piagam')?.addEventListener('click', () => {
     window.print();

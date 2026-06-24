@@ -66,7 +66,7 @@ const CONFIG = {
       }
     ],
     totalPeriod: '1 Juni 2024 – 30 Juni 2026',
-    logoFilename: 'Logo_Alpro-removebg-preview.png',
+    logoFilename: 'Logo Alpro.webp',
     contributions: [
       '**Penyusunan Laporan Adaptif:** Senantiasa adaptif dan tanggap dalam menyusun berbagai laporan operasional secara terstruktur demi mendukung pengambilan keputusan tim manajemen.',
       '**Edukasi Pengetahuan Produk:** Menyusun materi pembelajaran produk (*product knowledge*) dan panduan teknis kompetisi secara komprehensif guna meningkatkan kapasitas tim di lapangan.',
