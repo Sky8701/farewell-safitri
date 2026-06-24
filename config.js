@@ -53,7 +53,7 @@ const CONFIG = {
 
   // ─── INFO SERTIFIKAT (sudah terisi, tidak perlu diubah) ───
   certificate: {
-    name: 'Safitri Lailasari, S.Sos',
+    name: 'Safitri Lailasari, S.Sos','Apresiasi.png',
     company: 'Apotek Alpro',
     division: 'Sales & Geo Marketing',
     roles: [
