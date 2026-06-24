@@ -1,7 +1,7 @@
 /**
  * ╔══════════════════════════════════════════════════════════╗
  * ║     KONFIGURASI WEB ALBUM — SAFITRI LAILASARI           ║
- * ║     Apotek Alpro · Divisi Sales & Geo Marketing         ║
+ * ║     Apotek Alpro · Keluarga Besar                       ║
  * ╚══════════════════════════════════════════════════════════╝
  *
  * CARA ISI KONFIGURASI INI:

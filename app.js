@@ -1,6 +1,6 @@
 /* ============================================================
    app.js — Web Album Safitri Lailasari
-   Apotek Alpro · Sales & Geo Marketing
+   Apotek Alpro · Keluarga Besar
    ============================================================ */
 
 'use strict';
@@ -1063,7 +1063,7 @@ async function initApp() {
   hideLoadingScreen();
 
   console.info(
-    '%c🎀 Web Album Safitri Lailasari%c\nApotek Alpro — Sales & Geo Marketing',
+    '%c🎀 Web Album Safitri Lailasari%c\nKeluarga Besar Apotek Alpro',
     'color:#C9A84C;font-size:16px;font-weight:bold',
     'color:#FDF6EC;font-size:12px'
   );
