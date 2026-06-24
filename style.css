@@ -1148,14 +1148,38 @@ section {
   background: var(--dark);
   overflow: hidden;
 }
+.video-thumb-fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--dark-elevated), var(--dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
 .video-thumb-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
-  transition: filter var(--speed-mid);
+  filter: brightness(0.65) blur(3px);
+  transform: scale(1);
+  transition: filter 0.4s var(--transition), transform 0.4s var(--transition);
 }
-.video-card:hover .video-thumb-img { filter: brightness(0.5); }
+.video-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(74, 14, 26, 0.35);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.4s var(--transition);
+  pointer-events: none;
+}
+.video-card:hover .video-thumb-img {
+  filter: brightness(0.9) blur(0px);
+  transform: scale(1.05);
+}
+.video-card:hover .video-thumb-overlay {
+  opacity: 0;
+}
 .video-play-btn {
   position: absolute;
   inset: 0;

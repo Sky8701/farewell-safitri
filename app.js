@@ -20,7 +20,7 @@ const DriveAPI = {
     const url =
       `https://www.googleapis.com/drive/v3/files` +
       `?q=%27${folderId}%27+in+parents+and+trashed%3Dfalse` +
-      `&fields=files(id%2Cname%2CmimeType)` +
+      `&fields=files(id%2Cname%2CmimeType%2CthumbnailLink)` +
       `&pageSize=1000` +
       `&key=${CONFIG.apiKey}`;
     try {
@@ -28,12 +28,21 @@ const DriveAPI = {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const map = {};
-      (data.files || []).forEach(f => { map[f.name.toLowerCase()] = f.id; });
+      const thumbs = {};
+      (data.files || []).forEach(f => {
+        const nameLower = f.name.toLowerCase();
+        map[nameLower] = f.id;
+        if (f.thumbnailLink) {
+          thumbs[f.id] = f.thumbnailLink;
+        }
+      });
       this.cache[key] = map;
+      this.cache[key + '_thumbs'] = thumbs;
       return map;
     } catch (err) {
       console.warn(`[DriveAPI] Failed to load folder ${key}:`, err.message);
       this.cache[key] = {};
+      this.cache[key + '_thumbs'] = {};
       return {};
     }
   },
@@ -68,6 +77,15 @@ const DriveAPI = {
   /** Video embed URL */
   videoEmbedUrl(fileId) {
     return `https://drive.google.com/file/d/${fileId}/preview`;
+  },
+
+  /** Get video thumbnail URL by file ID */
+  getVideoThumbnail(folderKey, fileId) {
+    const thumbMap = this.cache[folderKey + '_thumbs'] || {};
+    const originalLink = thumbMap[fileId] || null;
+    if (!originalLink) return null;
+    // Upgrade resolution from =s220 to =s600
+    return originalLink.replace(/=s\d+$/, '=s600');
   },
 
   /** Load all folders in parallel */
@@ -839,15 +857,28 @@ const VideoAlbum = {
   renderVideoCard(v) {
     const fileId = DriveAPI.getFileId(v.folder, v.filename);
     const hasFile = !!fileId;
+    const thumbUrl = fileId ? DriveAPI.getVideoThumbnail(v.folder, fileId) : null;
+
+    let thumbContent = `
+      <div class="video-thumb-fallback">
+        🎬
+      </div>
+    `;
+
+    if (thumbUrl) {
+      thumbContent = `
+        <img class="video-thumb-img" src="${thumbUrl}" alt="${v.title}" loading="lazy" />
+        <div class="video-thumb-overlay"></div>
+      `;
+    }
+
     return `
       <div class="video-card ${hasFile ? '' : 'opacity-50'}"
            onclick="VideoAlbum.openVideo('${v.id}')"
            data-video-id="${v.id}"
            style="${hasFile ? '' : 'cursor:default;opacity:0.5'}">
         <div class="video-thumb">
-          <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--dark-elevated),var(--dark));display:flex;align-items:center;justify-content:center;font-size:2.5rem;">
-            🎬
-          </div>
+          ${thumbContent}
           <div class="video-play-btn">
             <div class="video-play-circle">▶</div>
           </div>
