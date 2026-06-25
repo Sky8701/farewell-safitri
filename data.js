@@ -835,7 +835,21 @@ const PHOTO_EVENTS = [
     year: 2026,
     folder: 'images2026',
     caption: 'Masya Allah, sebar flyer pun tetap Happy & Sparkling.',
-    photos:Array.from({length: 14}, (_, i) => `Sebar Flyer Sorrento 25 Jun 26  (${i + 1}).jpg`)
+    photos: [
+      'Sebar Flyer Sorrento 25 Jun 26 (1).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (2).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (3).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (4).jpeg
+      'Sebar Flyer Sorrento 25 Jun 26 (5).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (6).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (7).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (8).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (9).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (10).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (11).jpeg
+      'Sebar Flyer Sorrento 25 Jun 26 (12).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (13).jpeg',
+      'Sebar Flyer Sorrento 25 Jun 26 (14).jpeg',
     ]
   },
 ];
