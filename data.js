@@ -827,7 +827,17 @@ const PHOTO_EVENTS = [
       'Vihara Dharma Subha 20 Jun 26 (5).jpeg',
     ]
   },
-
+  {
+    id: 'sebar-flyer-sorrento-2026',
+    title: 'Sebar Flyer Sorrento',
+    displayDate: '25 Juni 2026',
+    date: '2026-06-25',
+    year: 2026,
+    folder: 'images2026',
+    caption: 'Masya Allah, sebar flyer pun tetap Happy & Sparkling.',
+    photos:Array.from({length: 14}, (_, i) => `Sebar Flyer Sorrento 25 Jun 26  (${i + 1}).jpg`)
+    ]
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -1205,5 +1215,35 @@ const MESSAGES = [
     role: 'Busdev',
     message: 'Selamat atas kelulusannya😇 \n Semoga sukses selalu dimanapun berada \n Dan pesanku, jadilah Dirimu sendiri, tetap Bahagia \n Dan Explore semua yang kamu sukai, jangan malu \n Serta tetap berkarya. \n\n Good luck Bestie🌺',
     emoji: '🐣',
+  },
+  {
+    name: 'Isti Mukaromah',
+    role: 'OSS',
+    message: 'Kakak Cantiq, sukses selalu dimanapun kau berada nanti. \n Tetep HAPPY dan jangan sampe jadi abu-abu lagi yaa, haha. \n Jangan terlalu memaksakan diri kalo udah capek.\n Makasih yaa udah ngajarin banyak hal sejak aku join di HO. \n Lop yu & see you on top Chief!😆',
+    emoji: '🐑',
+  },
+  {
+    name: 'Sekar Kinasih',
+    role: 'BPT',
+    message: 'Kak, aku sedih banget kamu udah gak disini... \n Tapi aku sangat amat bahagia liat Spark✨ kamu balik lagi. \n Eventho aku selalu nyebelin sama kamu tapi u are always be my Sister! \n I'll always cherish u wherever u are! \n\n Bahagia terus ya kak. Jangan sampai Spark✨ kamu ilang lagi, or even orang lain ngambil Spark✨ kamu! \n love u kak❤️',
+    emoji: '💋',
+  },
+  {
+    name: 'Rahma Agustina Aliana (RALIN)',
+    role: 'BPT',
+    message: '"Safitri, Angela, Cong" Haha selamat lulus ya!!! \n\n Jujur sedih banget, tapi aku ikut senang karena kamu berani mengambil kesempatan baru untuk berkembang. \n\n Thank you for being such a good friend & colleague. \n Good luck for your next chapter! \n Semoga makin sukses,happy & achieve everything you aim for. \n\n Already Miss You!!❤️',
+    emoji: '🏃🏻‍♀️',
+  },
+  {
+    name: 'Ginting Eka Prasetyo',
+    role: 'OSS',
+    message: 'Selamat menyelesaikan perjalanan disini kak, dimanapun berada sukses selalu.',
+    emoji: '👓',
+  },
+  {
+    name: 'Aulia Wiracandra',
+    role: 'OSS',
+    message: 'Kak Saf, selamat lulus dari sini. \n Terima kasih sudah menjadi bagian dari OSS juga. Kerja bareng Kak Saf menyenangkan. \n Terima kasih kebersamaan atas apa yang telah dibangun. \n\n Good luck for your next journey.',
+    emoji: '👽',
   },
 ];

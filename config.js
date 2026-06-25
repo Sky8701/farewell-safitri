@@ -46,7 +46,7 @@ const CONFIG = {
   // Foto akan berganti otomatis setiap 5 detik (slideshow).
   // Urutan bebas, min 1 foto, max tidak terbatas.
   heroCoverFilenames: [
-    '1730820218531.jfif','Apresiasi.png',
+    '1730820218531.jfif','Apresiasi.png','Natalia Wedding 14 Sept 24 (3).jpg','Morning Sharing 9 Des 24.jpg',
     // Tambah nama file lain dari folder Cover Random di sini:
     // 'Apresiasi.png',
   ],
