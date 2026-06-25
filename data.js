@@ -839,14 +839,14 @@ const PHOTO_EVENTS = [
       'Sebar Flyer Sorrento 25 Jun 26 (1).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (2).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (3).jpeg',
-      'Sebar Flyer Sorrento 25 Jun 26 (4).jpeg
+      'Sebar Flyer Sorrento 25 Jun 26 (4).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (5).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (6).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (7).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (8).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (9).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (10).jpeg',
-      'Sebar Flyer Sorrento 25 Jun 26 (11).jpeg
+      'Sebar Flyer Sorrento 25 Jun 26 (11).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (12).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (13).jpeg',
       'Sebar Flyer Sorrento 25 Jun 26 (14).jpeg',
