@@ -1239,7 +1239,7 @@ const MESSAGES = [
   {
     name: 'Sekar Kinasih',
     role: 'BPT',
-    message: 'Kak, aku sedih banget kamu udah gak disini... \n Tapi aku sangat amat bahagia liat Spark✨ kamu balik lagi. \n Eventho aku selalu nyebelin sama kamu tapi u are always be my Sister! \n I'll always cherish u wherever u are! \n\n Bahagia terus ya kak. Jangan sampai Spark✨ kamu ilang lagi, or even orang lain ngambil Spark✨ kamu! \n love u kak❤️',
+    message: "Kak, aku sedih banget kamu udah gak disini... \n Tapi aku sangat amat bahagia liat Spark✨ kamu balik lagi. \n Eventho aku selalu nyebelin sama kamu tapi u are always be my Sister! \n I'll always cherish u wherever u are! \n\n Bahagia terus ya kak. Jangan sampai Spark✨ kamu ilang lagi, or even orang lain ngambil Spark✨ kamu! \n love u kak❤️",
     emoji: '💋',
   },
   {
