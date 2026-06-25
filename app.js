@@ -353,7 +353,7 @@ const HeroSlideshow = {
   slides: [],
   current: 0,
   timer: null,
-  INTERVAL: 5000, // ms between slides
+  INTERVAL: 3000, // ms between slides
 
   /** Build slides from resolved file IDs */
   init(fileIds) {

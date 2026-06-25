@@ -43,10 +43,10 @@ const CONFIG = {
 
   // ─── LANGKAH 4: Cover Hero (bisa lebih dari 1 foto!) ───────
   // Isi array dengan nama-nama file dari folder Cover Random.
-  // Foto akan berganti otomatis setiap 5 detik (slideshow).
+  // Foto akan berganti otomatis setiap 3 detik (slideshow).
   // Urutan bebas, min 1 foto, max tidak terbatas.
   heroCoverFilenames: [
-    '1730820218531.jfif','Apresiasi.png','Natalia Wedding 14 Sept 24 (3).jpg','Morning Sharing 9 Des 24.jpg',
+    '1730820218531.jfif','Apresiasi.png','Natalia Wedding 14 Sept 24 (3).jpg','21 nov 24 (5).jpg','Morning Sharing 9 Des 24.jpg','GO 1 Jun 25 (1).jpg','Agustusan 20 Aug 25 (24).jpg','Agustusan 20 Aug 25 (29).jpg','GO Bekasi Aug 25 (1).jpg','Badminton 17 Sep 25 (6).jpg','Badminton 17 Sep 25 (7).jpg','Gathering Sales 32 Miliar 30 Sep 25 (3).jpg','Gathering Sales 32 Miliar 30 Sep 25 (7).jpg','Gathering Sales 32 Miliar 30 Sep 25 (20).jpg','Apoteker Cilik 7 Des 25 (1).jpg','CNY Ramadhan 25 Feb 26 (11).jpg','Idul Fitri 20 Mar 26.jpg','Last Day Hasidan 15 Jun 26 (12).jpg','Posyandu Lansia Melati Kelapa Dua 19 Jun 26 (2).jpeg','Vihara Dharma Subha 20 Jun 26 (1).jpeg','Vihara Dharma Subha 20 Jun 26 (5).jpeg','Sebar Flyer Sorrento 25 Jun 26 (1).jpeg','Sebar Flyer Sorrento 25 Jun 26 (4).jpeg','Sebar Flyer Sorrento 25 Jun 26 (8).jpeg',
     // Tambah nama file lain dari folder Cover Random di sini:
     // 'Apresiasi.png',
   ],
