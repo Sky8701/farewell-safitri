@@ -1416,6 +1416,7 @@ const QuoteSection = {
     const bg = document.getElementById('quote-photo-bg');
     if (!bg || this.photoPool.length === 0) return;
     const url = this.photoPool[Math.floor(Math.random() * this.photoPool.length)];
+    console.info('[QuoteSection] Loading background photo:', url);
     
     // Set background secara langsung untuk menghindari masalah loading pada cross-origin Image objects di JS
     bg.style.backgroundImage = `url('${url}')`;

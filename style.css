@@ -1861,19 +1861,23 @@ section {
 .quote-photo-bg {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg); /* Pas dengan kartu */
   background-size: cover;
   background-position: center;
   opacity: 0;
   transition: background-image 1.2s ease, opacity 1s ease;
-  filter: blur(18px) saturate(0.5);
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 90%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 90%);
+  filter: blur(10px) saturate(0.5); /* Kurangi blur agar siluet foto terlihat elegan di dalam kartu */
   pointer-events: none;
   will-change: transform, opacity;
   transform: translateZ(0); /* GPU acceleration */
+  z-index: 1;
 }
 .quote-photo-bg.loaded { opacity: 0.20; }
+
+.quote-card-front > *:not(.quote-photo-bg) {
+  position: relative;
+  z-index: 2;
+}
 
 /* ── Particle canvas ── */
 .quote-canvas {
