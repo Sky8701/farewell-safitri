@@ -1866,7 +1866,7 @@ section {
   background-position: center;
   opacity: 0;
   transition: background-image 1.2s ease, opacity 1s ease;
-  filter: blur(4px) saturate(0.65); /* Kurangi blur agar siluet foto terlihat lebih jelas dan tajam */
+  filter: blur(2px) saturate(0.75); /* Diturunkan ke 2px agar wajah cukup jelas, namun tetap samar blur */
   pointer-events: none;
   will-change: transform, opacity;
   transform: translateZ(0); /* GPU acceleration */

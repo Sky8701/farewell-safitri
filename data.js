@@ -1260,4 +1260,22 @@ const MESSAGES = [
     message: 'Kak Saf, selamat lulus dari sini. \n Terima kasih sudah menjadi bagian dari OSS juga. Kerja bareng Kak Saf menyenangkan. \n Terima kasih kebersamaan atas apa yang telah dibangun. \n\n Good luck for your next journey.',
     emoji: '👽',
   },
+  {
+    name: 'Bram',
+    role: 'Teknisi',
+    message: 'Hai Mbak Angel. Tetap full smile ya.Always positive thinking. \n Tetap jaga komunikasi dan kalau ada waktu sempat-sempat nongkrong bareng ya. \n Sukses selalu. Thx',
+    emoji: '👨‍🔧',
+  },
+  {
+    name: 'Suwahyu',
+    role: 'Ops, your babe',
+    message: 'Aku menyadari beberapa waktu terakhir, kamu lebih banyak diem sama aku. \n Tapi aku diem juga. \n\n Bukan karena aku tak peduli, melainkan aku memberikan ruang untuk kamu. \n sekuat tenaga aku sudah coba ajak kamu untuk bertahan, tapi.., ternyata tekadmu lebih kuat dari itu. \n\n Kapanpun ruang dan waktumu ada, kita bisa jumpa di "Gammy Coffee", dan kita bisa bercerita lebih lepas😊❤️',
+    emoji: '☕',
+  },
+  {
+    name: 'Lusia',
+    role: 'Sahabat sehidup semati',
+    message: 'Darling, waktu memang cepat berlalu. \n Jujur kaget banget nggak nyangka. \n Terlepas dari apapun yang membuat kamu mengambil keputusan ini, saya yakin dan percaya bahwa kamu sudah pertimbangkan baik-baik. \n\n Sesuai janji kita bersama, kita akan terbang🛫 di 2027. \n\n Tetap jaga silaturahmi di antara kita. \n Sukses dimanapun kamu berada. \n Secara pribadi kami pasti merindukanmu selalu. \n Darling, sukses dan tetap bahagia.',
+    emoji: '👩🏻‍❤️‍👩🏼',
+  },
 ];
