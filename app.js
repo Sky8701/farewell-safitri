@@ -233,6 +233,24 @@ const Particles = {
     this.ctx = this.canvas.getContext('2d');
     this.resize();
     this.createParticles();
+
+    this.isHeroVisible = true;
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      const observer = new IntersectionObserver(entries => {
+        this.isHeroVisible = entries[0].isIntersecting;
+        if (this.isHeroVisible) {
+          if (!this.animId) this.animate();
+        } else {
+          if (this.animId) {
+            cancelAnimationFrame(this.animId);
+            this.animId = null;
+          }
+        }
+      }, { threshold: 0.05 });
+      observer.observe(heroSection);
+    }
+
     this.animate();
     window.addEventListener('resize', () => {
       this.resize();
@@ -263,6 +281,10 @@ const Particles = {
   },
 
   animate() {
+    if (!this.isHeroVisible) {
+      this.animId = null;
+      return;
+    }
     this.animId = requestAnimationFrame(() => this.animate());
     const { ctx, canvas, particles } = this;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1366,10 +1388,12 @@ const QuoteSection = {
   /** Build a pool of photo URLs from cached Drive data */
   _buildPhotoPool() {
     if (!DriveAPI.isReady) return;
-    // Collect thumbnail URLs from all photo folders
     const pool = [];
+    const allowedFolders = ['imagesCover', 'images2024', 'images2025', 'images2026'];
+    
     Object.entries(DriveAPI.cache).forEach(([key, val]) => {
-      if (key.endsWith('_thumbs')) return;
+      // Saring hanya folder gambar yang ditentukan
+      if (!allowedFolders.includes(key)) return;
       if (typeof val !== 'object') return;
       Object.values(val).forEach(fileId => {
         if (typeof fileId === 'string' && fileId.length > 10) {
@@ -1439,7 +1463,30 @@ const QuoteSection = {
     if (!this.canvas || !this.ctx) return;
     const { canvas: cv, ctx, particles } = this;
 
+    this.isCanvasVisible = true;
+
+    // Setup IntersectionObserver to play/pause particles based on viewport visibility
+    const container = document.getElementById('pojok-motivasi');
+    if (container) {
+      const observer = new IntersectionObserver(entries => {
+        this.isCanvasVisible = entries[0].isIntersecting;
+        if (this.isCanvasVisible) {
+          if (!this.animFrame) loop();
+        } else {
+          if (this.animFrame) {
+            cancelAnimationFrame(this.animFrame);
+            this.animFrame = null;
+          }
+        }
+      }, { threshold: 0.05 });
+      observer.observe(container);
+    }
+
     const loop = () => {
+      if (!this.isCanvasVisible) {
+        this.animFrame = null;
+        return;
+      }
       ctx.clearRect(0, 0, cv.width, cv.height);
       particles.forEach(p => {
         p.x += p.vx;
@@ -1459,7 +1506,7 @@ const QuoteSection = {
       });
       this.animFrame = requestAnimationFrame(loop);
     };
-    this.animFrame = requestAnimationFrame(loop);
+    loop();
   },
 
   /** Swipe gesture for mobile */

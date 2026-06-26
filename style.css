@@ -352,6 +352,11 @@ section {
   max-width: 600px;
   line-height: 1.7;
 }
+.text-center .section-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 /* Divider */
 .gold-divider {
@@ -766,6 +771,14 @@ section {
   font-size: 0.8rem;
   line-height: 1.5;
   color: var(--text-secondary);
+}
+@media (min-width: 601px) {
+  .piagam-contribution-item:nth-child(13) {
+    grid-column: span 2;
+    justify-self: center;
+    max-width: 48%;
+    width: 100%;
+  }
 }
 @media (max-width: 600px) {
   .piagam-contributions-grid {
@@ -1860,8 +1873,10 @@ section {
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 90%);
   pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0); /* GPU acceleration */
 }
-.quote-photo-bg.loaded { opacity: 0.07; }
+.quote-photo-bg.loaded { opacity: 0.20; }
 
 /* ── Particle canvas ── */
 .quote-canvas {
@@ -1882,11 +1897,18 @@ section {
 .quote-card {
   position: relative;
   width: 100%;
-  min-height: 340px;
+  min-height: 380px;
   transform-style: preserve-3d;
   transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
   cursor: default;
   border-radius: var(--radius-lg);
+  will-change: transform;
+  transform: translateZ(0); /* GPU acceleration */
+}
+@media (max-width: 640px) {
+  .quote-card {
+    min-height: 420px;
+  }
 }
 .quote-card.flipping {
   transform: rotateY(180deg);
@@ -1899,12 +1921,13 @@ section {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: var(--radius-lg);
-  padding: 36px 40px 32px;
+  padding: 32px 36px;
   border: 1px solid rgba(201,168,76,0.3);
   box-shadow:
     0 0 0 1px rgba(201,168,76,0.08) inset,
     0 8px 40px rgba(0,0,0,0.5),
     0 0 60px rgba(201,168,76,0.08);
+  overflow: hidden;
 }
 
 /* Front */
@@ -1918,7 +1941,8 @@ section {
   -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 8px;
+  justify-content: center;
   animation: card-glow-pulse 4s ease-in-out infinite;
 }
 @keyframes card-glow-pulse {
