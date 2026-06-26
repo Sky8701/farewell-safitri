@@ -1097,6 +1097,387 @@ function initConfetti() {
 }
 
 // ════════════════════════════════════════
+//  POJOK MOTIVASI — QUOTE SECTION
+// ════════════════════════════════════════
+const QuoteSection = {
+  quotes: typeof QUOTES !== 'undefined' ? QUOTES : [],
+  currentIndex: null,
+  favorites: [],
+  isAnimating: false,
+
+  // Particle system state
+  particles: [],
+  animFrame: null,
+  canvas: null,
+  ctx: null,
+
+  // Photo pool from Drive (filled on init if available)
+  photoPool: [],
+
+  /** Initialize the section */
+  init() {
+    if (this.quotes.length === 0) {
+      console.warn('[QuoteSection] QUOTES array is empty — quotes.js may not be loaded.');
+      return;
+    }
+
+    // Load favorites from localStorage
+    try {
+      this.favorites = JSON.parse(localStorage.getItem('safitri_fav_quotes') || '[]');
+    } catch (e) {
+      this.favorites = [];
+    }
+
+    // Setup canvas particles
+    this._initCanvas();
+
+    // Build photo pool from cached Drive thumbnails
+    this._buildPhotoPool();
+
+    // Show first quote (no animation on init)
+    this._showQuote(this._randomIndex(), false);
+
+    // Update fav count badge
+    this._updateFavCount();
+
+    // Swipe support (mobile)
+    this._initSwipe();
+  },
+
+  /** Pick a random index different from current */
+  _randomIndex() {
+    if (this.quotes.length <= 1) return 0;
+    let idx;
+    do { idx = Math.floor(Math.random() * this.quotes.length); }
+    while (idx === this.currentIndex);
+    return idx;
+  },
+
+  /** Show a specific quote, with optional flip animation */
+  _showQuote(idx, animate = true) {
+    const q = this.quotes[idx];
+    if (!q) return;
+
+    const card   = document.getElementById('quote-card');
+    const doFlip = animate && card;
+
+    if (doFlip) {
+      if (this.isAnimating) return;
+      this.isAnimating = true;
+
+      // Trigger flip (front → back)
+      card.classList.add('flipping');
+
+      setTimeout(() => {
+        // Midpoint: update content while card is hidden
+        this._updateDOM(q, idx);
+        this._updatePhotoBackground();
+      }, 330);
+
+      setTimeout(() => {
+        // Flip back (back → front)
+        card.classList.remove('flipping');
+        setTimeout(() => { this.isAnimating = false; }, 350);
+      }, 660);
+
+    } else {
+      this._updateDOM(q, idx);
+      this._updatePhotoBackground();
+    }
+
+    this.currentIndex = idx;
+  },
+
+  /** Update DOM with quote data */
+  _updateDOM(q, idx) {
+    const setText    = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    const setHTML    = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+    const setAttr    = (id, attr, val) => { const el = document.getElementById(id); if (el) el.setAttribute(attr, val); };
+    const setClass   = (id, cls, on) => { const el = document.getElementById(id); if (el) el.classList.toggle(cls, on); };
+
+    setText('quote-category', q.category || '');
+    setText('quote-author', '— ' + (q.author || 'Anonimus'));
+    setText('quote-counter', `Quote #${idx + 1} dari ${this.quotes.length}`);
+
+    // Quote text + language attribute
+    const textEl = document.getElementById('quote-text');
+    if (textEl) {
+      textEl.textContent = q.text || '';
+      textEl.setAttribute('lang', q.lang === 'ar' ? 'ar' : q.lang === 'en' ? 'en' : 'id');
+      // Re-trigger animation
+      textEl.style.animation = 'none';
+      textEl.offsetHeight; // reflow
+      textEl.style.animation = '';
+    }
+
+    // Translation (for AR and EN quotes)
+    const transEl = document.getElementById('quote-translation');
+    if (transEl) {
+      if (q.translation) {
+        transEl.textContent = q.translation;
+        transEl.classList.add('visible');
+      } else {
+        transEl.textContent = '';
+        transEl.classList.remove('visible');
+      }
+    }
+
+    // Fav star state
+    const isFav = this.favorites.includes(idx);
+    const favIcon = document.getElementById('fav-icon');
+    const favBtn  = document.getElementById('btn-quote-fav');
+    if (favIcon) favIcon.textContent = isFav ? '★' : '☆';
+    if (favBtn)  favBtn.classList.toggle('active', isFav);
+  },
+
+  /** Public: show random quote (called by button) */
+  showRandom() {
+    this._showQuote(this._randomIndex(), true);
+  },
+
+  /** Toggle favorite for current quote */
+  toggleFav() {
+    if (this.currentIndex === null) return;
+    const idx  = this.currentIndex;
+    const pos  = this.favorites.indexOf(idx);
+    const icon = document.getElementById('fav-icon');
+    const btn  = document.getElementById('btn-quote-fav');
+
+    if (pos === -1) {
+      this.favorites.push(idx);
+      if (icon) icon.textContent = '★';
+      if (btn)  btn.classList.add('active');
+      this.showToast('✦ Ditambahkan ke favorit');
+    } else {
+      this.favorites.splice(pos, 1);
+      if (icon) icon.textContent = '☆';
+      if (btn)  btn.classList.remove('active');
+      this.showToast('Dihapus dari favorit');
+    }
+
+    this._saveFavs();
+    this._updateFavCount();
+    // Refresh fav list if open
+    const list = document.getElementById('quote-favlist');
+    if (list && list.classList.contains('open')) this._renderFavList();
+  },
+
+  /** Copy current quote to clipboard */
+  async copyQuote() {
+    if (this.currentIndex === null) return;
+    const q = this.quotes[this.currentIndex];
+    let text = `"${q.text}"`;
+    if (q.translation) text += `\n(${q.translation})`;
+    text += `\n— ${q.author}`;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      this.showToast('⎘ Quote berhasil disalin!');
+    } catch (e) {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity  = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      this.showToast('⎘ Quote berhasil disalin!');
+    }
+  },
+
+  /** Show/hide fav list panel */
+  toggleFavList() {
+    const panel = document.getElementById('quote-favlist');
+    if (!panel) return;
+    const isOpen = panel.classList.toggle('open');
+    if (isOpen) this._renderFavList();
+  },
+
+  /** Render items in fav list panel */
+  _renderFavList() {
+    const container = document.getElementById('quote-favlist-items');
+    if (!container) return;
+
+    if (this.favorites.length === 0) {
+      container.innerHTML = '<p class="quote-fav-empty">Belum ada quote favorit.<br>Ketuk ☆ pada quote yang kamu sukai.</p>';
+      return;
+    }
+
+    container.innerHTML = this.favorites.map(idx => {
+      const q = this.quotes[idx];
+      if (!q) return '';
+      const displayText = q.lang !== 'id' && q.translation ? q.translation : q.text;
+      return `<div class="quote-fav-item" onclick="QuoteSection._jumpToQuote(${idx})" role="button" tabindex="0">
+        <div class="quote-fav-item-text">${displayText}</div>
+        <div class="quote-fav-item-author">— ${q.author}</div>
+      </div>`;
+    }).join('');
+  },
+
+  /** Jump to a specific quote index (from fav list) */
+  _jumpToQuote(idx) {
+    this.toggleFavList();
+    setTimeout(() => this._showQuote(idx, true), 200);
+  },
+
+  /** Clear all favorites */
+  clearFavs() {
+    this.favorites = [];
+    this._saveFavs();
+    this._updateFavCount();
+    this._renderFavList();
+    this.showToast('Semua favorit dihapus');
+
+    // Update current quote star
+    const icon = document.getElementById('fav-icon');
+    const btn  = document.getElementById('btn-quote-fav');
+    if (icon) icon.textContent = '☆';
+    if (btn)  btn.classList.remove('active');
+  },
+
+  _saveFavs() {
+    try { localStorage.setItem('safitri_fav_quotes', JSON.stringify(this.favorites)); }
+    catch (e) {}
+  },
+
+  _updateFavCount() {
+    const badge = document.getElementById('fav-count');
+    if (!badge) return;
+    if (this.favorites.length > 0) {
+      badge.textContent = this.favorites.length;
+      badge.style.display = 'inline';
+    } else {
+      badge.style.display = 'none';
+    }
+  },
+
+  /** Show a brief toast notification */
+  showToast(msg) {
+    const toast = document.getElementById('quote-toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  },
+
+  /** Build a pool of photo URLs from cached Drive data */
+  _buildPhotoPool() {
+    if (!DriveAPI.isReady) return;
+    // Collect thumbnail URLs from all photo folders
+    const pool = [];
+    Object.entries(DriveAPI.cache).forEach(([key, val]) => {
+      if (key.endsWith('_thumbs')) return;
+      if (typeof val !== 'object') return;
+      Object.values(val).forEach(fileId => {
+        if (typeof fileId === 'string' && fileId.length > 10) {
+          pool.push(DriveAPI.thumbUrl(fileId, 'w800'));
+        }
+      });
+    });
+    // Shuffle and take up to 30 photos for rotation
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    this.photoPool = pool.slice(0, 30);
+  },
+
+  /** Update ghost photo background on card change */
+  _updatePhotoBackground() {
+    const bg = document.getElementById('quote-photo-bg');
+    if (!bg || this.photoPool.length === 0) return;
+    const url = this.photoPool[Math.floor(Math.random() * this.photoPool.length)];
+    const img = new Image();
+    img.onload = () => {
+      bg.style.backgroundImage = `url('${url}')`;
+      bg.classList.add('loaded');
+    };
+    img.onerror = () => {}; // silent fail
+    img.src = url;
+  },
+
+  /** Canvas particle system — floating gold stars */
+  _initCanvas() {
+    this.canvas = document.getElementById('quote-canvas');
+    if (!this.canvas) return;
+    this.ctx = this.canvas.getContext('2d');
+    this._resizeCanvas();
+    this._spawnParticles();
+    this._animParticles();
+
+    window.addEventListener('resize', () => {
+      this._resizeCanvas();
+      this._spawnParticles();
+    });
+  },
+
+  _resizeCanvas() {
+    if (!this.canvas) return;
+    const rect = this.canvas.parentElement.getBoundingClientRect();
+    this.canvas.width  = rect.width  || 760;
+    this.canvas.height = rect.height || 600;
+  },
+
+  _spawnParticles() {
+    const w = this.canvas ? this.canvas.width  : 760;
+    const h = this.canvas ? this.canvas.height : 600;
+    this.particles = Array.from({ length: 28 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.5 + 0.4,
+      vy: -(Math.random() * 0.3 + 0.1),
+      vx: (Math.random() - 0.5) * 0.15,
+      opacity: Math.random() * 0.6 + 0.2,
+      flicker: Math.random() * Math.PI * 2,
+    }));
+  },
+
+  _animParticles() {
+    if (!this.canvas || !this.ctx) return;
+    const { canvas: cv, ctx, particles } = this;
+
+    const loop = () => {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.flicker += 0.04;
+        const alpha = p.opacity * (0.7 + 0.3 * Math.sin(p.flicker));
+
+        // Wrap around
+        if (p.y < -4) p.y = cv.height + 4;
+        if (p.x < -4) p.x = cv.width  + 4;
+        if (p.x > cv.width  + 4) p.x = -4;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(201,168,76,${alpha.toFixed(2)})`;
+        ctx.fill();
+      });
+      this.animFrame = requestAnimationFrame(loop);
+    };
+    this.animFrame = requestAnimationFrame(loop);
+  },
+
+  /** Swipe gesture for mobile */
+  _initSwipe() {
+    const universe = document.getElementById('quote-universe');
+    if (!universe) return;
+    let startX = null;
+    universe.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    universe.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 60) this.showRandom();
+      startX = null;
+    }, { passive: true });
+  },
+};
+
+// ════════════════════════════════════════
 //  MAIN APP INIT
 // ════════════════════════════════════════
 async function initApp() {
@@ -1116,6 +1497,7 @@ async function initApp() {
   initPiagam();
   PhotoAlbum.init();
   VideoAlbum.init();
+  QuoteSection.init();
   initMessages();
   initNavigation();
   initConfetti();
@@ -1136,3 +1518,4 @@ async function initApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
+

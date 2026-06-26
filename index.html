@@ -97,6 +97,7 @@
     <li><a href="#piagam"      class="nav-link" aria-label="Piagam penghargaan">Piagam</a></li>
     <li><a href="#album-foto"  class="nav-link" aria-label="Album foto">Foto</a></li>
     <li><a href="#album-video" class="nav-link" aria-label="Album video">Video</a></li>
+    <li><a href="#pojok-motivasi" class="nav-link" aria-label="Pojok motivasi">Motivasi</a></li>
     <li><a href="#pesan-kesan" class="nav-link" aria-label="Pesan dan kesan">Pesan</a></li>
   </ul>
 
@@ -112,6 +113,7 @@
   <a href="#piagam"      class="nav-link">Piagam</a>
   <a href="#album-foto"  class="nav-link">Album Foto</a>
   <a href="#album-video" class="nav-link">Album Video</a>
+  <a href="#pojok-motivasi" class="nav-link">Pojok Motivasi</a>
   <a href="#pesan-kesan" class="nav-link">Pesan & Kesan</a>
   <a href="#penutup"     class="nav-link">Penutup</a>
 </div>
@@ -372,6 +374,107 @@
 </section>
 
 <!-- ═══════════════════════════════════════
+     SECTION 4.5: POJOK MOTIVASI
+     ═══════════════════════════════════════ -->
+<section id="pojok-motivasi" aria-label="Pojok motivasi dan inspirasi">
+  <div class="section-inner">
+
+    <div class="fade-in-up text-center">
+      <span class="section-label">Untuk Saat Kamu Butuh Kekuatan</span>
+      <h2 class="section-title">Pojok <em>Motivasi</em></h2>
+      <p class="section-subtitle">
+        365 kata-kata pilihan — satu untuk setiap hari dalam setahun.
+        Klik kapanpun kamu butuh semangat baru.
+      </p>
+      <div class="gold-divider" style="margin:24px auto"></div>
+    </div>
+
+    <!-- Velvet Nebula Universe -->
+    <div class="quote-universe" id="quote-universe">
+
+      <!-- Floating orbs (purely decorative, CSS animated) -->
+      <div class="quote-orb quote-orb-1" aria-hidden="true"></div>
+      <div class="quote-orb quote-orb-2" aria-hidden="true"></div>
+      <div class="quote-orb quote-orb-3" aria-hidden="true"></div>
+
+      <!-- Ghost photo background (filled by app.js if available) -->
+      <div class="quote-photo-bg" id="quote-photo-bg" aria-hidden="true"></div>
+
+      <!-- Particle canvas -->
+      <canvas class="quote-canvas" id="quote-canvas" aria-hidden="true"></canvas>
+
+      <!-- Quote Card -->
+      <div class="quote-card-scene" id="quote-card-scene">
+        <div class="quote-card" id="quote-card">
+
+          <!-- Front face -->
+          <div class="quote-card-face quote-card-front" id="quote-front">
+            <div class="quote-top-row">
+              <span class="quote-category-badge" id="quote-category"></span>
+              <button class="quote-star-btn" id="btn-quote-fav" aria-label="Simpan ke favorit"
+                onclick="QuoteSection.toggleFav()">
+                <span id="fav-icon">☆</span>
+              </button>
+            </div>
+            <div class="quote-open-mark" aria-hidden="true">“</div>
+            <blockquote class="quote-text" id="quote-text" lang="id"></blockquote>
+            <div class="quote-translation" id="quote-translation"></div>
+            <div class="quote-close-mark" aria-hidden="true">”</div>
+            <div class="quote-author" id="quote-author"></div>
+            <div class="quote-counter" id="quote-counter"></div>
+          </div>
+
+          <!-- Back face (shows during flip) -->
+          <div class="quote-card-face quote-card-back" aria-hidden="true">
+            <div class="quote-back-pattern" aria-hidden="true">
+              <span>✦</span><span>✦</span><span>✦</span>
+              <span>✦</span><span>✦</span><span>✦</span>
+              <span>✦</span><span>✦</span><span>✦</span>
+            </div>
+            <div class="quote-back-logo">Pojok Motivasi</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="quote-actions">
+        <button class="quote-btn quote-btn-copy" id="btn-quote-copy"
+          aria-label="Salin quote" onclick="QuoteSection.copyQuote()">
+          <span class="quote-btn-icon">⎘</span> Salin
+        </button>
+        <button class="quote-btn quote-btn-new" id="btn-quote-new"
+          aria-label="Quote baru" onclick="QuoteSection.showRandom()">
+          <span class="quote-btn-icon">✦</span> Quote Baru
+        </button>
+        <button class="quote-btn quote-btn-fav-list" id="btn-fav-list"
+          aria-label="Lihat favorit" onclick="QuoteSection.toggleFavList()">
+          <span class="quote-btn-icon">⭐</span> Favorit
+          <span class="quote-fav-count" id="fav-count" style="display:none"></span>
+        </button>
+      </div>
+
+      <!-- Toast notifikasi -->
+      <div class="quote-toast" id="quote-toast" role="status" aria-live="polite"></div>
+
+      <!-- Favorit panel -->
+      <div class="quote-favlist" id="quote-favlist">
+        <div class="quote-favlist-header">
+          <h4 class="quote-favlist-title">⭐ Quote Favoritmu</h4>
+          <button class="quote-favlist-close" onclick="QuoteSection.toggleFavList()" aria-label="Tutup">✕</button>
+        </div>
+        <div class="quote-favlist-items" id="quote-favlist-items"></div>
+        <button class="quote-btn-clear-fav" id="btn-clear-fav" onclick="QuoteSection.clearFavs()">
+          Hapus Semua
+        </button>
+      </div>
+
+    </div><!-- end .quote-universe -->
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
      SECTION 5: PESAN & KESAN
      ═══════════════════════════════════════ -->
 <section id="pesan-kesan" aria-label="Pesan dan kesan">
@@ -479,6 +582,7 @@
      ═══════════════════════════════════════ -->
 <script src="config.js?v=3"></script>
 <script src="data.js?v=3"></script>
+<script src="quotes.js?v=1"></script>
 <script src="app.js?v=3"></script>
 
 </body>
