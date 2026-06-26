@@ -1397,7 +1397,8 @@ const QuoteSection = {
       if (typeof val !== 'object') return;
       Object.values(val).forEach(fileId => {
         if (typeof fileId === 'string' && fileId.length > 10) {
-          pool.push(DriveAPI.thumbUrl(fileId, 'w800'));
+          // Gunakan resolusi w600 yang lebih cepat di-load daripada w800
+          pool.push(DriveAPI.thumbUrl(fileId, 'w600'));
         }
       });
     });
@@ -1407,6 +1408,7 @@ const QuoteSection = {
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
     this.photoPool = pool.slice(0, 30);
+    console.info('[QuoteSection] Photo pool built with size:', this.photoPool.length);
   },
 
   /** Update ghost photo background on card change */
@@ -1414,13 +1416,10 @@ const QuoteSection = {
     const bg = document.getElementById('quote-photo-bg');
     if (!bg || this.photoPool.length === 0) return;
     const url = this.photoPool[Math.floor(Math.random() * this.photoPool.length)];
-    const img = new Image();
-    img.onload = () => {
-      bg.style.backgroundImage = `url('${url}')`;
-      bg.classList.add('loaded');
-    };
-    img.onerror = () => {}; // silent fail
-    img.src = url;
+    
+    // Set background secara langsung untuk menghindari masalah loading pada cross-origin Image objects di JS
+    bg.style.backgroundImage = `url('${url}')`;
+    bg.classList.add('loaded');
   },
 
   /** Canvas particle system — floating gold stars */

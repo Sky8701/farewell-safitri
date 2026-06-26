@@ -351,10 +351,7 @@ section {
   color: var(--text-secondary);
   max-width: 600px;
   line-height: 1.7;
-}
-.text-center .section-subtitle {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -1934,9 +1931,9 @@ section {
 .quote-card-front {
   background:
     linear-gradient(135deg,
-      rgba(26,18,37,0.92) 0%,
-      rgba(30,12,20,0.95) 60%,
-      rgba(22,10,32,0.92) 100%);
+      rgba(26,18,37,0.45) 0%,
+      rgba(30,12,20,0.50) 60%,
+      rgba(22,10,32,0.45) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   display: flex;
