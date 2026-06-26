@@ -1866,13 +1866,13 @@ section {
   background-position: center;
   opacity: 0;
   transition: background-image 1.2s ease, opacity 1s ease;
-  filter: blur(2px) saturate(0.75); /* Diturunkan ke 2px agar wajah cukup jelas, namun tetap samar blur */
+  filter: saturate(0.85); /* Hilangkan blur agar foto 100% tajam, pertahankan saturasi 85% */
   pointer-events: none;
   will-change: transform, opacity;
   transform: translateZ(0); /* GPU acceleration */
   z-index: 1;
 }
-.quote-photo-bg.loaded { opacity: 0.20; }
+.quote-photo-bg.loaded { opacity: 0.25; }
 
 .quote-card-front > *:not(.quote-photo-bg) {
   position: relative;
