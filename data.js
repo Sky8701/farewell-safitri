@@ -447,7 +447,7 @@ const PHOTO_EVENTS = [
     date: '2025-08-29',
     year: 2025,
     folder: 'images2025',
-    caption: 'Ketika ultah setiap orang menjadi sumber senyum mu',
+    caption: 'Ketika ultah setiap orang menjadi sumber senyummu',
     photos: [
       'Ultah Ria 29 Aug 25 (1).jpg',
       'Ultah Ria 29 Aug 25 (2).jpg',
@@ -547,7 +547,7 @@ const PHOTO_EVENTS = [
     date: '2025-12-07',
     year: 2025,
     folder: 'images2025',
-    caption: 'Walaupun capek dan ada gesekan, terima kasih kamu sudah do the best untu membuat anak-anak ini tersenyum',
+    caption: 'Walaupun capek dan ada gesekan, terima kasih kamu sudah do the best untuk membuat anak-anak ini tersenyum',
     photos: Array.from({length: 9}, (_, i) => `Apoteker Cilik 7 Des 25 (${i + 1}).jpg`)
   },
 
@@ -558,7 +558,7 @@ const PHOTO_EVENTS = [
     date: '2025-12-12',
     year: 2025,
     folder: 'images2025',
-    caption: 'Sukses selalu Pak Pram, figur kebapakan yang ALpro butuhkan',
+    caption: 'Sukses selalu Pak Pram, figur kebapakan yang Alpro butuhkan',
     photos: [
       'Last Day P Pram 12 Des 25 (1).jpg',
       'Last Day P Pram 12 Des 25 (2).jpg',
@@ -580,7 +580,7 @@ const PHOTO_EVENTS = [
     date: '2026-02-02',
     year: 2026,
     folder: 'images2026',
-    caption: 'Kamu memang tidak ada di Spotlight, tetapi tanpamu GO ini mungkintidak berjalan lancar',
+    caption: 'Kamu memang tidak ada di Spotlight, tetapi tanpamu GO ini mungkin tidak berjalan lancar',
     photos: [
       'GO 2 Feb 26 (1).jpg',
       'GO 2 Feb 26 (2).jpg',
@@ -922,7 +922,7 @@ const VIDEO_EVENTS = {
       date: '2025-03-24',
       folder: 'videosMomenSeru',
       filename: 'BUKBER 24 MARET 25  (4).mp4',
-      caption: 'Percayalah kamu akan banyak mengalami momen seru seperti ini',
+      caption: 'Percayalah kamu akan lebih banyak lagi mengalami momen seru seperti ini di masa depanmu',
     },
     {
       id: 'v-bukber-mar-2025-5',
@@ -986,7 +986,7 @@ const VIDEO_EVENTS = {
       date: '2025-08-20',
       folder: 'videosMomenSeru',
       filename: 'Agustusan 20 Aug 25 (4).mp4',
-      caption: 'Ini moment Gong nya ppas Agustusan, hati-hati paket datamu habis karena ukuran video ini sangat besar',
+      caption: 'Ini moment Gong nya pas Agustusan, hati-hati paket datamu habis karena ukuran video ini sangat besar',
     },
     {
       id: 'v-gathering-32m-2025-1',
@@ -1031,7 +1031,7 @@ const VIDEO_EVENTS = {
       date: '2025-12-25',
       folder: 'videosMomenSeru',
       filename: 'NATAL 2025.mp4',
-      caption: 'Bhinneka Tunggal Ika, adakah wajah mu di video ucapan natal ini?',
+      caption: 'Bhinneka Tunggal Ika, adakah wajahmu di video ucapan natal ini?',
     },
     {
       id: 'v-cny-ramadhan-2026-1',
@@ -1179,7 +1179,7 @@ const MESSAGES = [
   {
     name: 'Jessica Melati',
     role: 'Finance',
-    message: 'Happy resign day Kak Saf!! \nTerima kasih atas kontribusi kakak untuk Alpro, semoga semakin sukses dan selalu happy ya❤️',
+    message: 'Happy resign day Kak Saf!! \n Terima kasih atas kontribusi kakak untuk Alpro, semoga semakin sukses dan selalu happy ya❤️',
     emoji: '🌸',
   },
   {
