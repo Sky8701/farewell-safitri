@@ -855,8 +855,8 @@ const PHOTO_EVENTS = [
   {
     id: 'last-go-juni-2026',
     title: 'Last GO (Tangerang) 27-28 Juni 2026',
-    displayDate: '25 Juni 2026',
-    date: '2026-06-27','2026-06-27'
+    displayDate: '27-28 Juni 2026',
+    date: '2026-06-27, 2026-06-28',
     year: 2026,
     folder: 'images2026',
     caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
