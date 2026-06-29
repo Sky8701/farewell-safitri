@@ -211,6 +211,9 @@
 
       <!-- The Letter -->
       <div class="coo-letter" id="coo-letter" aria-hidden="true" aria-modal="true" role="dialog">
+        <!-- Floating Close button for mobile/desktop quick access -->
+        <button class="coo-letter-close-top" onclick="EnvelopeSection.close()" aria-label="Tutup surat">✕</button>
+
         <div class="coo-letter-paper">
           <!-- Letterhead -->
           <div class="coo-letter-head">
@@ -238,12 +241,12 @@
             <p class="coo-letter-sign-name">Bernard Lee</p>
             <p class="coo-letter-sign-role">Chief Operating Officer · Apotek Alpro</p>
           </div>
-        </div>
 
-        <!-- Close button -->
-        <button class="coo-letter-close" onclick="EnvelopeSection.close()" aria-label="Tutup surat">
-          ✕ Tutup Surat
-        </button>
+          <!-- Close button inside scrollable paper -->
+          <button class="coo-letter-close" onclick="EnvelopeSection.close()" aria-label="Tutup surat">
+            ✕ Tutup Surat
+          </button>
+        </div>
       </div>
 
     </div><!-- end .envelope-scene -->
