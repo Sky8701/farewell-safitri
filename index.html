@@ -94,6 +94,7 @@
   <!-- Desktop -->
   <ul class="nav-links" role="list">
     <li><a href="#hero"        class="nav-link" aria-label="Halaman depan">Beranda</a></li>
+    <li><a href="#coo-message" class="nav-link" aria-label="Pesan COO">Pesan COO</a></li>
     <li><a href="#piagam"      class="nav-link" aria-label="Piagam penghargaan">Piagam</a></li>
     <li><a href="#album-foto"  class="nav-link" aria-label="Album foto">Foto</a></li>
     <li><a href="#album-video" class="nav-link" aria-label="Album video">Video</a></li>
@@ -110,6 +111,7 @@
 <!-- Mobile Drawer -->
 <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Menu navigasi">
   <a href="#hero"        class="nav-link">Beranda</a>
+  <a href="#coo-message" class="nav-link">Pesan COO</a>
   <a href="#piagam"      class="nav-link">Piagam</a>
   <a href="#album-foto"  class="nav-link">Album Foto</a>
   <a href="#album-video" class="nav-link">Album Video</a>
@@ -169,6 +171,82 @@
   <div class="hero-scroll-hint" aria-hidden="true">
     <span>Scroll</span>
     <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SECTION 1.5: COO MESSAGE — AMPLOP
+     ═══════════════════════════════════════ -->
+<section id="coo-message" aria-label="Pesan dari COO">
+  <div class="section-inner">
+
+    <div class="coo-header fade-in-up text-center">
+      <span class="section-label">Dari Meja COO</span>
+      <h2 class="section-title">Sebuah <em>Surat</em> Untukmu</h2>
+      <p class="section-subtitle">Klik amplop untuk membuka pesan pribadi ini</p>
+      <div class="gold-divider" style="margin:24px auto"></div>
+    </div>
+
+    <div class="envelope-scene" id="envelope-scene">
+
+      <!-- The Envelope -->
+      <div class="envelope" id="envelope"
+           role="button" aria-label="Buka amplop pesan COO" tabindex="0"
+           onclick="EnvelopeSection.open()"
+           onkeydown="if(event.key==='Enter'||event.key===' ')EnvelopeSection.open()">
+        <div class="envelope-body">
+          <div class="envelope-flap" id="envelope-flap"></div>
+          <div class="envelope-fold-left"></div>
+          <div class="envelope-fold-right"></div>
+          <div class="envelope-fold-bottom"></div>
+          <div class="envelope-seal" id="envelope-seal">
+            <span class="envelope-seal-letter">A</span>
+          </div>
+        </div>
+        <div class="envelope-hint" id="envelope-hint">
+          <span class="envelope-hint-icon">✉</span>
+          <span>Klik untuk membuka</span>
+        </div>
+      </div>
+
+      <!-- The Letter -->
+      <div class="coo-letter" id="coo-letter" aria-hidden="true" aria-modal="true" role="dialog">
+        <div class="coo-letter-paper">
+          <!-- Letterhead -->
+          <div class="coo-letter-head">
+            <div class="coo-letter-logo" aria-hidden="true">A</div>
+            <div class="coo-letter-headinfo">
+              <div class="coo-letter-company">Apotek Alpro</div>
+              <div class="coo-letter-title">Chief Operating Officer</div>
+            </div>
+          </div>
+          <div class="coo-letter-divider"></div>
+          <p class="coo-letter-date">Monday, June 29th, 2026</p>
+
+          <!-- Body text — filled by EnvelopeSection.init() -->
+          <div class="coo-letter-body" id="coo-letter-body"></div>
+
+          <!-- Photo from GO 2026 folder -->
+          <div class="coo-letter-photo-wrap">
+            <div class="coo-letter-photo" id="coo-letter-photo" aria-label="Foto Grand Opening 27-28 Jun 2026"></div>
+            <p class="coo-letter-photo-caption">Grand Opening · 27–28 Juni 2026</p>
+          </div>
+
+          <!-- Signature -->
+          <div class="coo-letter-signature">
+            <div class="coo-letter-sign-line"></div>
+            <p class="coo-letter-sign-name">Bernard Lee</p>
+            <p class="coo-letter-sign-role">Chief Operating Officer · Apotek Alpro</p>
+          </div>
+        </div>
+
+        <!-- Close button -->
+        <button class="coo-letter-close" onclick="EnvelopeSection.close()" aria-label="Tutup surat">
+          ✕ Tutup Surat
+        </button>
+      </div>
+
+    </div><!-- end .envelope-scene -->
   </div>
 </section>
 
@@ -383,7 +461,7 @@
       <span class="section-label">Untuk Saat Kamu Butuh Kekuatan</span>
       <h2 class="section-title">Pojok <em>Motivasi</em></h2>
       <p class="section-subtitle">
-        365 kata-kata pilihan — satu untuk setiap hari dalam setahun.
+        371 kata-kata pilihan — satu untuk setiap hari dalam setahun.
         Klik kapanpun kamu butuh semangat baru.
       </p>
       <div class="gold-divider" style="margin:24px auto"></div>

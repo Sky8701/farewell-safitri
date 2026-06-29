@@ -852,6 +852,25 @@ const PHOTO_EVENTS = [
       'Sebar Flyer Sorrento 25 Jun 26 (14).jpeg',
     ]
   },
+  {
+    id: 'last-go-juni-2026',
+    title: 'Last GO (Tangerang) 27-28 Juni 2026',
+    displayDate: '25 Juni 2026',
+    date: '2026-06-27','2026-06-27'
+    year: 2026,
+    folder: 'images2026',
+    caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
+    photos: [
+      'GO 27-28 Jun 26 (1).jpg',
+      'GO 27-28 Jun 26 (2).jpg',
+      'GO 27-28 Jun 26 (3).jpg',
+      'GO 27-28 Jun 26 (4).jpg',
+      'GO 27-28 Jun 26 (5).jfif',
+      'GO 27-28 Jun 26 (6).jfif',
+      'GO 27-28 Jun 26 (7).jfif',
+      'GO 27-28 Jun 26 (8).jfif',
+    ]
+  },
 ];
 
 // ═══════════════════════════════════════════════════════════

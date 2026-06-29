@@ -1250,6 +1250,31 @@ const QuoteSection = {
     const favBtn  = document.getElementById('btn-quote-fav');
     if (favIcon) favIcon.textContent = isFav ? '★' : '☆';
     if (favBtn)  favBtn.classList.toggle('active', isFav);
+
+    // ── Hendri Quote Special Highlight ──
+    const isHendri = (q.author || '').trim().toLowerCase() === 'hendri';
+    const card = document.getElementById('quote-card');
+    if (card) card.classList.toggle('hendri-quote', isHendri);
+
+    // Inject or update Hendri badge (positioned above the author line)
+    const authorEl = document.getElementById('quote-author');
+    if (authorEl) {
+      let badge = document.getElementById('hendri-special-badge');
+      if (!badge) {
+        badge = document.createElement('div');
+        badge.id = 'hendri-special-badge';
+        badge.className = 'hendri-badge';
+        badge.setAttribute('aria-label', 'Quote spesial dari Hendri');
+        badge.innerHTML = '<span class="hendri-badge-icon">✦</span><span>Pesan Spesial dari Hendri</span>';
+        authorEl.parentNode.insertBefore(badge, authorEl);
+      }
+      // Toggle visibility
+      if (isHendri) {
+        badge.classList.add('visible');
+      } else {
+        badge.classList.remove('visible');
+      }
+    }
   },
 
   /** Public: show random quote (called by button) */
@@ -1525,6 +1550,140 @@ const QuoteSection = {
 };
 
 // ════════════════════════════════════════
+//  COO MESSAGE — ENVELOPE SECTION
+// ════════════════════════════════════════
+const EnvelopeSection = {
+  isOpen: false,
+
+  // Full COO letter text — paragraphs as array
+  letterParagraphs: [
+    "Last weekend, Apotek Alpro celebrated another 11 new outlet Grand Openings. 🎉",
+    "But today, the story is not about the number of outlets.",
+    "Today, the story is about one person behind many of those moments — Safitri Lailasari, S.Sos.",
+    "This Grand Opening felt a little different, because it will be the last Grand Opening organized by her.",
+    "Safitri is not a Head of Department.\nShe may not appear in the organization chart as someone \"big\".\nTo some people, maybe she is rem as an \"admin operation\".",
+    "But for those of us who have walked this journey with her, we know she is much more than that.",
+    "Safitri started with Alpro from the early days when we first came in.",
+    "She was there during the handover and transformation process from the previous company.",
+    "She welcomed us, arranged many things nicely, and helped us understand the people, the flow, and the \"hidden map\" of the organization. 🧭",
+    "She knew who to contact — from satpam, outlet team, vendor, PIC, manager, until director — whenever we needed to settle issues quickly.",
+    "Of course, she was not perfect.",
+    "Sometimes she gave headache to her superior, Pak Hendri .S.E. 😅",
+    "Sometimes she cried when asked to do morning sharing & always panicked when we asked for details.",
+    "Sometimes she got confused when things became too complicated.",
+    "But that is exactly what makes her human.",
+    "Because on the other side, Safitri is also someone who kept showing up.",
+    "Nervous, but still tried.\nNot always confident, but still did her part.\nNot always under the spotlight, but always somewhere in the background, quietly helping things move. 🌱",
+    "And of course, she is also our talented entertainer — the one who never failed to surprise us with her jokes in unique \"Safitri style\". 😂",
+    "To me, Safitri represents many genuine, kind, hardworking Indonesians who are fighting their best for their life.",
+    "Not perfect.\nNot always loud.\nNot always seen.",
+    "But sincere.\nHardworking.\nAnd full of heart.\nIn her own way, she is Yong Xin Kaizen — continuously improving, even when the road is not easy.",
+    "Maybe, in terms of position, her job can eventually be replaced by someone else.",
+    "But in terms of person, the help Safitri gave to Apotek Alpro, the memories she created, the laughter she brought, and the spark she left behind — those are things that cannot be replaced.",
+    "Tomorrow will be her last day.",
+    "After years of fighting alone, merantau in Jakarta, she has decided to return to her hometown.",
+    "And I see this not as a goodbye.",
+    "I see this as a proud graduation. 🎓",
+    "Safitri, Pak B wishes you all the best for your next chapter.",
+    "Stay real.\nStay kind.\nStay brave.\nStay as the Safitri that we know.",
+    "And yes, until today I am still puzzled why you call yourself Angelababy… 😆",
+    "But maybe you are right.",
+    "Because for Alpro, you will always be one of our Angels. 🤍",
+    "Thank you for everything, Safitri.",
+    "Once an Alproean, always an Alproean. 💙🧡",
+  ],
+
+  init() {
+    // Populate letter body
+    const bodyEl = document.getElementById('coo-letter-body');
+    if (bodyEl) {
+      bodyEl.innerHTML = this.letterParagraphs.map(para => {
+        // Handle multi-line paragraphs (\n → <br>)
+        const html = para.replace(/\n/g, '<br>');
+        return `<p>${html}</p>`;
+      }).join('');
+    }
+
+    // Load photo from Drive (folder: images2026, filename: 'go 27-28 jun 26 (7).jfif')
+    this._loadPhoto();
+  },
+
+  _loadPhoto() {
+    const photoEl = document.getElementById('coo-letter-photo');
+    if (!photoEl) return;
+
+    // Try to find the photo from the images2026 Drive folder
+    const targetFilename = 'go 27-28 jun 26 (7).jfif';
+    const fileId = DriveAPI.getFileId('images2026', targetFilename);
+
+    if (fileId) {
+      const url = DriveAPI.viewUrl(fileId);
+      photoEl.classList.add('loading');
+      photoEl.style.backgroundImage = `url('${url}')`;
+      photoEl.style.backgroundSize  = 'cover';
+      photoEl.style.backgroundPosition = 'center';
+      photoEl.classList.remove('loading');
+      console.info('[EnvelopeSection] Photo loaded:', targetFilename);
+    } else {
+      // Fallback: try thumbnail URL if viewUrl fails
+      // We'll try all images2026 thumbnails to find a suitable one as last resort
+      console.info('[EnvelopeSection] Photo not found in cache — will attempt on open');
+      photoEl.classList.add('loading');
+    }
+  },
+
+  open() {
+    if (this.isOpen) return;
+    this.isOpen = true;
+
+    const envelope = document.getElementById('envelope');
+    const letter   = document.getElementById('coo-letter');
+    const scene    = document.getElementById('envelope-scene');
+
+    if (!envelope || !letter) return;
+
+    // 1. Open envelope flap + hide seal
+    envelope.classList.add('is-open');
+
+    // 2. After flap opens, raise letter
+    setTimeout(() => {
+      letter.setAttribute('aria-hidden', 'false');
+      letter.classList.add('is-visible');
+
+      // Expand scene to show full letter
+      if (scene) scene.classList.add('letter-open');
+
+      // Try photo load again in case Drive wasn't ready at init
+      const photoEl = document.getElementById('coo-letter-photo');
+      if (photoEl && photoEl.classList.contains('loading')) {
+        this._loadPhoto();
+      }
+    }, 480);
+  },
+
+  close() {
+    if (!this.isOpen) return;
+    this.isOpen = false;
+
+    const envelope = document.getElementById('envelope');
+    const letter   = document.getElementById('coo-letter');
+    const scene    = document.getElementById('envelope-scene');
+
+    if (!envelope || !letter) return;
+
+    // 1. Drop letter back
+    letter.classList.remove('is-visible');
+    letter.setAttribute('aria-hidden', 'true');
+
+    // 2. Close envelope flap after letter recedes
+    setTimeout(() => {
+      envelope.classList.remove('is-open');
+      if (scene) scene.classList.remove('letter-open');
+    }, 350);
+  },
+};
+
+// ════════════════════════════════════════
 //  MAIN APP INIT
 // ════════════════════════════════════════
 async function initApp() {
@@ -1541,6 +1700,7 @@ async function initApp() {
 
   // Init sections
   initHero();
+  EnvelopeSection.init();
   initPiagam();
   PhotoAlbum.init();
   VideoAlbum.init();
