@@ -2691,6 +2691,7 @@ section {
 .hendri-badge {
   display: inline-flex;
   align-items: center;
+  align-self: center;
   gap: 6px;
   padding: 5px 14px 5px 10px;
   border-radius: var(--radius-xl);
@@ -2727,6 +2728,17 @@ section {
   border-color: rgba(201,168,76,0.5);
   color: var(--gold-light);
 }
+
+/* Align subtitles of Foto and Video sections to the left on desktop screens */
+@media (min-width: 641px) {
+  #album-foto .section-subtitle,
+  #album-video .section-subtitle {
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
 
 
 

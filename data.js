@@ -1297,4 +1297,10 @@ const MESSAGES = [
     message: 'Darling, waktu memang cepat berlalu. \n Jujur kaget banget nggak nyangka. \n Terlepas dari apapun yang membuat kamu mengambil keputusan ini, saya yakin dan percaya bahwa kamu sudah pertimbangkan baik-baik. \n\n Sesuai janji kita bersama, kita akan terbang🛫 di 2027. \n\n Tetap jaga silaturahmi di antara kita. \n Sukses dimanapun kamu berada. \n Secara pribadi kami pasti merindukanmu selalu. \n Darling, sukses dan tetap bahagia.',
     emoji: '👩🏻‍❤️‍👩🏼',
   },
+  {
+    name: 'Hendri',
+    role: 'Your mentor, partner, and hopefully one of your close friend',
+    message: 'Tidak akan cukup kata untuk menggambarkan istimewanya kamu. \n Tidak cukup ungkapan dari kami untuk membagikan perasaan kami tentang apa yang sudah kamu sentuh dari diri kami masing-masing. \n\n Tetapi ketahuilah Fit, kamu orang yang spesial, dan seperti lagu tema dari Album ini, \n "Perpisahan yang harus terjadi, terjadilah..." \n Karena tidak ada penyesalan untuk semua hal baik dan indah yang sudah kamu buat.',
+    emoji: '💛',
+  },
 ];
