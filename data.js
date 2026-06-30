@@ -1298,6 +1298,18 @@ const MESSAGES = [
     emoji: '☕',
   },
   {
+    name: 'Saddam',
+    role: 'PPR',
+    message: 'Mudah-mudahan selalu bahagia dimanapun berada. \n Selalu senyum dan tertawa di situasi apapun, Ceu Fitri',
+    emoji: '🪬',
+  },
+  {
+    name: 'Pak Tafsir',
+    role: 'Security',
+    message: 'Untuk anakku, Safitri, \n\nYang selalu ceria, sigap, cekatan. \n Semoga sellau diberi kebahagiaan. \n Semoga kedepannya karirnya tambah sukses. \n\n Sehat terus, anakku Safitri',
+    emoji: '👨🏻‍✈️',
+  },
+  {
     name: 'Lusia',
     role: 'Sahabat sehidup semati',
     message: 'Darling, waktu memang cepat berlalu. \n Jujur kaget banget nggak nyangka. \n Terlepas dari apapun yang membuat kamu mengambil keputusan ini, saya yakin dan percaya bahwa kamu sudah pertimbangkan baik-baik. \n\n Sesuai janji kita bersama, kita akan terbang🛫 di 2027. \n\n Tetap jaga silaturahmi di antara kita. \n Sukses dimanapun kamu berada. \n Secara pribadi kami pasti merindukanmu selalu. \n Darling, sukses dan tetap bahagia.',
