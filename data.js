@@ -1286,6 +1286,12 @@ const MESSAGES = [
     emoji: '👨‍🔧',
   },
   {
+    name: 'Trijun',
+    role: 'Procurement',
+    message: 'Awal mula kamu memasuki kehidupan perofficean akulah yang menyambut walaupun tidak terlalu welcome sata itu, hahaha. \n Berjuang sama-sama dari awal, sesayang itu aku sama kamu. \n Tetap jadi anak baik, sukses kedepannya, sehat selalu, cepat bertemu jodoh yang tepat...❤️❤️❤️',
+    emoji: '3️⃣',
+  },
+  {
     name: 'Suwahyu',
     role: 'Ops, your babe',
     message: 'Aku menyadari beberapa waktu terakhir, kamu lebih banyak diem sama aku. \n Tapi aku diem juga. \n\n Bukan karena aku tak peduli, melainkan aku memberikan ruang untuk kamu. \n sekuat tenaga aku sudah coba ajak kamu untuk bertahan, tapi.., ternyata tekadmu lebih kuat dari itu. \n\n Kapanpun ruang dan waktumu ada, kita bisa jumpa di "Gammy Coffee", dan kita bisa bercerita lebih lepas😊❤️',
