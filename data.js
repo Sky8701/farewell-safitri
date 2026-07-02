@@ -856,10 +856,10 @@ const PHOTO_EVENTS = [
     id: 'last-go-juni-2026',
     title: 'Last GO (Tangerang) 27-28 Juni 2026',
     displayDate: '27-28 Juni 2026',
-    date: '2026-06-27, 2026-06-28',
+    date: '2026-06-30',
     year: 2026,
     folder: 'images2026',
-    caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
+    caption: 'Last day kamu di Alpro, kamu tutup dengan senyum dan bangga ya... Kita semua masih bisa bertemu lagi dalam kondisi bahagia, Amin. Tq u for everything, Safitri.',
     photos: [
       'GO 27-28 Jun 26 (1).jpg',
       'GO 27-28 Jun 26 (2).jpg',
@@ -869,6 +869,23 @@ const PHOTO_EVENTS = [
       'GO 27-28 Jun 26 (6).jfif',
       'GO 27-28 Jun 26 (7).jfif',
       'GO 27-28 Jun 26 (8).jfif',
+    ]
+  },
+  {
+    id: 'last-day-in-alpro-juni-2026',
+    title: 'Last Day in Alpro 30 Juni 2026',
+    displayDate: '30 Juni 2026',
+    date: '2026-06-27, 2026-06-28',
+    year: 2026,
+    folder: 'images2026',
+    caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
+    photos: [
+      'Last Day in Alpro 30 Jun 2026 (1).jpg',
+      'Last Day in Alpro 30 Jun 2026 (2).jpg',
+      'Last Day in Alpro 30 Jun 2026 (3).jpg',
+      'Last Day in Alpro 30 Jun 2026 (4).jpg',
+      'Last Day in Alpro 30 Jun 2026 (5).jpg',
+      'Last Day in Alpro 30 Jun 2026 (6).jpg',
     ]
   },
 ];
@@ -1304,9 +1321,63 @@ const MESSAGES = [
     emoji: '🪬',
   },
   {
+    name: 'Sekar Kinasih',
+    role: 'BPT',
+    message: 'See u when i see u kak. \n I’ll miss u kak angle. \n I love u sooooo muchhhhh #angelababy',
+    emoji: '💋',
+  },
+  {
+    name: 'Rahma Agustina Aliana (RALIN)',
+    role: 'BPT',
+    message: 'good luck on your next chapter. \n thanks for the memories & all the little moments along the way. \n take care & hope our paths cross again someday. \n\n #angelababy',
+    emoji: '🏃🏻‍♀️',
+  },
+  {
+    name: 'Zhafran',
+    role: 'Procurement',
+    message: 'Terima kasih untuk semua kontribusi dan kebersamaannya selama ini. \n Semoga sukses di perjalanan berikutnya, selalu diberikan kelancaran, kesehatan, dan semakin berkembang di tempat yang baru. \n Sampai bertemu lagi, sukses selalu! 🤍 \n\n #angelababy',
+    emoji: '👀',
+  },
+  {
+    name: 'Rifqi',
+    role: 'Procurement',
+    message: 'sampai jumpa di lain waktu, ce. 🫡',
+    emoji: '🎗️',
+  },
+  {
+    name: 'Ria',
+    role: 'Academy',
+    message: 'Neng Safitri... \n\n Mugia angel tiasa sukses dina raraga ka payunna, sing seueur rejeki sareng barokah kanggo sadayana oge mugia tiasa tepang deui dina kaayaan anu langkung sae. ',
+    emoji: '🧕',
+  },
+  {
+    name: 'Iress',
+    role: 'Procurement',
+    message: 'Sukses dan bahagia selalu ya dimanapun berada utk Safitri @Linda Sihombing @Genny PhM Alpro God Bless 😇',
+    emoji: '🛴',
+  },
+  {
+    name: 'Ella',
+    role: 'PPM',
+    message: 'See u ka enjeeelll🥹🫂 \n\n Safitri terima kasih atas dedikasi, kontribusi dan sudah memberikan energi positif yang luar biasa selama ini🤗 💃🏻 \n Keep shining kakak!✨❤️ \n\n Sukses selalu buat bu @geny  bu @Linda Sihombing dan bu @ade. \n Terima kasih juga atas dedikasi dan kontribusi yang luar biasa!🔥❣️🤗',
+    emoji: '💐',
+  },
+  {
+    name: 'Desi Annastasia',
+    role: 'Your Partner in OSS',
+    message: 'Terimakasih atas dedikasi dan kontribusi yang luar biasa, semoga sukses dimana pun berada, see you on top Safitri @Linda Sihombing @Ade @Geny 🥰😇❤️',
+    emoji: '🎶',
+  },
+  {
+    name: 'Gita',
+    role: 'Academy',
+    message: 'Bahagia, sukses dimanapun. See u on top ka Safitri🫰🏻',
+    emoji: '🥖',
+  },
+  {
     name: 'Pak Tafsir',
     role: 'Security',
-    message: 'Untuk anakku, Safitri, \n\nYang selalu ceria, sigap, cekatan. \n Semoga sellau diberi kebahagiaan. \n Semoga kedepannya karirnya tambah sukses. \n\n Sehat terus, anakku Safitri',
+    message: 'Untuk anakku, Safitri, \n\n Yang selalu ceria, sigap, cekatan. \n Semoga sellau diberi kebahagiaan. \n Semoga kedepannya karirnya tambah sukses. \n\n Sehat terus, anakku Safitri',
     emoji: '👨🏻‍✈️',
   },
   {
