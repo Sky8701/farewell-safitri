@@ -859,7 +859,7 @@ const PHOTO_EVENTS = [
     date: '2026-06-30',
     year: 2026,
     folder: 'images2026',
-    caption: 'Last day kamu di Alpro, kamu tutup dengan senyum dan bangga ya... Kita semua masih bisa bertemu lagi dalam kondisi bahagia, Amin. Tq u for everything, Safitri.',
+    caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
     photos: [
       'GO 27-28 Jun 26 (1).jpg',
       'GO 27-28 Jun 26 (2).jpg',
@@ -878,7 +878,7 @@ const PHOTO_EVENTS = [
     date: '2026-06-27, 2026-06-28',
     year: 2026,
     folder: 'images2026',
-    caption: 'Last GO, good job Fit, kamu sudah FINISH WELL dan DOING THE BEST, semua tidak akan sama lagi tanpamu.',
+    caption: 'Last day kamu di Alpro, kamu tutup dengan senyum dan bangga ya... Kita semua masih bisa bertemu lagi dalam kondisi bahagia, Amin. Tq u for everything, Safitri.',
     photos: [
       'Last Day in Alpro 30 Jun 2026 (1).jpg',
       'Last Day in Alpro 30 Jun 2026 (2).jpg',
